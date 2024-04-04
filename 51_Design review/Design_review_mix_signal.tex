@@ -1,0 +1,494 @@
+\documentclass[xcolor=dvipsnames,envcountsect]{beamer}
+
+
+\usetheme{Madrid}
+%-------- color --------
+\definecolor{colortheme}{RGB}{0,127,190} % Official RGB code for Crimson Red
+\usecolortheme[named=colortheme]{structure}
+%-------- set color of 'example block' to crimson theme --------
+\setbeamercolor{block body example}{bg=white}
+\setbeamercolor{block title example}{fg=white, bg=blue!50!black}
+
+%-------- font --------
+\setbeamerfont{structure}{family=\rmfamily,series=\bfseries}
+\usefonttheme[stillsansseriftext]{structurebold}
+\setbeamerfont{section in head/foot}{size=\tiny}
+
+%-------- misc structure --------
+\useoutertheme[footline=authortitle,subsection=false]{miniframes}
+\useinnertheme{rounded}
+\addtobeamertemplate{block begin}{}{\justifying}
+\newtheorem{remark}[theorem]{Remark}
+\renewcommand{\indent}{\hspace*{2em}}
+\setbeamertemplate{theorems}[numbered]
+\setbeamertemplate{caption}[numbered]
+\usepackage[justification=centering]{caption}
+\renewcommand{\qedsymbol}{$\blacksquare$}
+
+%-------- packages to be used -------
+\usepackage{amsmath,amsfonts,amssymb,amscd,amsthm}
+
+\usepackage{graphicx,xcolor}
+\graphicspath{{../../ASIC-DESIGN/data/03_Plots/}}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{hyperref}
+\usepackage{multicol}
+\usepackage{ragged2e}
+\usepackage{siunitx}
+\usepackage{caption}
+\usepackage[english]{babel}
+\usepackage{rotating}
+\usepackage{enumerate}
+\usepackage{tikz}
+\usepackage{bm}
+\usepackage{csquotes}
+\usepackage{pdfpages} % to include pdf
+\usepackage{lscape}
+\usepackage{subfig}
+\PassOptionsToPackage{table}{xcolor}
+\usepackage{longtable}
+\definecolor{lightgray}{cmyk}{0,0,0,0.67}
+
+%-------- for bibliography -----------------
+\usepackage{biblatex}
+\setbeamertemplate{bibliography item}{\insertbiblabel}
+\addbibresource{References.bib}
+\setbeamertemplate{frametitle continuation}{\frametitle{\color{white}List of References}}
+
+%-------- WMSU Backgound -------------------
+\usebackgroundtemplate{%
+	\tikz[overlay,remember picture] \node[opacity=0.01, at=(current page.center)] {
+		\includegraphics[width=4.5in]{../../ASIC-DESIGN/data/03_Plots/02_Bootstrap/03_reference_current_schematic.png}};
+}
+
+%----------▲▲▲▲▲ PREAMBLE END ▲▲▲▲▲----------
+%------------------------------------------------
+%------------------------------------------------
+%------------------------------------------------
+%------------------------------------------------
+%------------------------------------------------
+
+%---------START EDITING HERE---------------------
+\title[ASIC Design review]{ASIC Design review}
+
+\author [Patrick Jansky, Matthias Meyer]{\textbf{Patrick Jansky, Matthias Meyer}}
+
+%\institute[OST] {\emph{Adviser: }\textbf{Paul Zbinden}\\[1em]
+	\institute[OST] {{OST}\\[1em]
+		%Electronic Design\\%College of Science and Mathematics\\Western Mindanao State University\\[1em]
+		\includegraphics[scale=0.15]{../../ASIC-DESIGN/data/03_Plots/02_Bootstrap/07_boostrap_montecarlo.pdf}}
+	
+	\date[\today]{\footnotesize \textbf{\today}}
+
+\begin{document}
+
+\begin{frame}{\titlepage}\end{frame}
+
+\section{Overview}
+\begin{frame}
+\frametitle{Overview} % Table of contents slide, comment this block out to remove it
+\tableofcontents % Throughout your presentation, if you choose to use \section{} and \subsection{} commands, these will automatically be printed on this slide as an overview of your presentation
+\end{frame}
+
+%----------------------------------------------------------------------------------------
+%	PRESENTATION SLIDES
+%----------------------------------------------------------------------------------------
+
+%------------------------------------------------
+% Sections can be created in order to organize your presentation into discrete blocks, all sections and subsections are automatically printed in the table of contents as an overview of the talk
+%------------------------------------------------
+
+
+
+
+
+
+
+\begin{frame}
+	\frametitle{Link collection}
+	\begin{figure}
+		\centering
+		\begin{minipage}{.4\textwidth}
+			\centering
+			\begin{itemize}
+				\item \href{https://asic-project.atlassian.net/jira/software/projects/MAP/boards/3/roadmap}{Jira}
+				\item \href{https://github.com/gstei/ASIC-DESIGN.git}{Git repo}
+				\item \href{https://www.xfab.com/manufacturing/prototyping}{XFAB TAPE-IN}
+			\end{itemize}
+			%Found out that that a current inside a wire produces an magnetic field.
+		\end{minipage}%
+		\hfill
+		\begin{minipage}{.59\textwidth}
+			
+		\end{minipage}
+	\end{figure}
+\end{frame}
+
+% 
+% \begin{frame}
+% 	\frametitle{Current reference}
+% 	\begin{figure}[ht]
+% 		\centering
+% 		\includegraphics[width=0.5\textwidth]{02_Bootstrap/03_reference_current_schematic.png}
+% 		\label{fig:ref_cur_schem}
+% 	\end{figure}
+% \end{frame}
+% includegraphics[width=4.5in]{../02_Bootstrap/03_reference_current_schematic.png}};
+% }
+% includegraphics[scale=0.15]{../02_Bootstrap/03_reference_current_schematic.png}}
+	
+\section{Current reference}
+
+\begin{frame}
+	\frametitle{Bootstrap Implemented}
+	\begin{figure}[ht]
+		\centering
+		\includegraphics[width=\textwidth]{02_Bootstrap/02_bootstrap_schematic.png}
+		\caption{Bootstrap Implemented}
+	\end{figure}
+\end{frame}
+\begin{frame}
+	\frametitle{Reference current schematic}
+	\begin{figure}[ht]
+		\centering
+		\includegraphics[width=0.45\textwidth]{02_Bootstrap/03_reference_current_schematic.png}
+		\caption{Reference current schematic}
+	\end{figure}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Monte Carlo distribution of the bootstrap}
+	\begin{figure}[ht]
+		\centering
+		\includegraphics[width=\textwidth]{02_Bootstrap/07_boostrap_montecarlo.pdf}
+	\end{figure}
+\end{frame}
+
+
+
+
+\begin{frame}
+	\frametitle{Bootstrap test bench}
+	\begin{figure}[ht]
+		\centering
+		\includegraphics[width=\textwidth]{02_Bootstrap/01_Bootstrap_tb_schematic.png}
+		\caption{Bootstrap test bench}
+	\end{figure}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Bootstrap current vs supply voltage}
+	\begin{figure}[ht]
+		\centering
+		\includegraphics[width=\textwidth]{02_Bootstrap/04_boostrap_current.pdf}
+		\caption{Bootstrap current vs supply voltage}
+	\end{figure}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Bootstrap output resistance $\frac{dV_{Vdd}}{dI_{Res}}$}
+	\begin{figure}[ht]
+		\centering
+		\includegraphics[width=\textwidth]{02_Bootstrap/05_boostrap_resistance.pdf}
+		\caption{Bootstrap output resistance $\frac{dV_{Vdd}}{dI_{Res}}$}
+	\end{figure}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Bootstrap test bench two}
+	\begin{figure}[ht]
+		\centering
+		\includegraphics[width=\textwidth]{02_Bootstrap/09_bootstrap_tb_2.png}
+		\caption{Bootstrap test bench two}
+	\end{figure}
+\end{frame}
+\begin{frame}
+	\frametitle{Bootstrap output resistance $\frac{dV_{out}}{dI{out}}$}
+	\begin{figure}[ht]
+		\centering
+		\includegraphics[width=\textwidth]{02_Bootstrap/08_boostrap_resistance_2.pdf}
+		\caption{Bootstrap output resistance $\frac{dV_{out}}{dI{out}}$}
+	\end{figure}
+\end{frame}
+
+
+
+\begin{frame}
+	\frametitle{Bootstrap test}
+	\begin{figure}[ht]
+		\centering
+		\includegraphics[width=\textwidth]{02_Bootstrap/06_test_results.png}
+		\caption{Bootstrap test}
+	\end{figure}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Bootstrap characteristics}
+	\begin{figure}[ht]
+		\centering
+		\resizebox{1\textwidth}{!}{\begin{tabular}{|p{3.5cm}|p{3.5cm}|p{3.5cm}|p{3.5cm}|}
+			\hline
+%			\rowcolor{lightgray}
+			\textbf{Description} &\textbf{Min}  &\textbf{Max} & \textbf{Unit} \\ \hline
+			
+			Reference current & 4.1 & 6.5 &\qty{}{\micro\ampere} \\ \hline
+			Current consumption & 25 & 40 & \qty{}{\micro\ampere} \\ \hline
+			Min voltage & 2.9& 3.2 & \qty{}{\volt} \\ \hline
+%			\caption{Bootstrap characteristics} % needs to go inside longtable environment
+%			\label{tab:booststrap}
+		\end{tabular}}
+	\end{figure}
+\end{frame}
+
+
+
+
+\section{Bandgap}
+\begin{frame}
+	\frametitle{Bandgap schematic}
+	\begin{figure}[ht]
+		\centering
+		\includegraphics[width=\textwidth]{03_Bandgap/02_bandgap_schematic.png}
+		\caption{Bandgap schematic}
+	\end{figure}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Bandgap test bench}
+	\begin{figure}[ht]
+		\centering
+		\includegraphics[width=\textwidth]{03_Bandgap/01_boots_bandg_tb_schematic.png}
+		\caption{Bandgap test bench}
+	\end{figure}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Bandgap voltage vs supply voltage}
+	\begin{figure}[ht]
+		\centering
+		\includegraphics[width=\textwidth]{03_Bandgap/03_bandgapvoltage_vs_supplyvoltage_plot.pdf}
+		\caption{Bandgap voltage vs supply voltage}
+	\end{figure}
+\end{frame}
+\begin{frame}
+	\frametitle{Bandgap voltage vs temperature}
+	\begin{figure}[ht]
+		\centering
+		\includegraphics[width=\textwidth]{03_Bandgap/03_bandgapvoltage_vs_supplyvoltage_plot.pdf}
+		\caption{Bandgap voltage vs temperature}
+	\end{figure}
+\end{frame}
+\begin{frame}
+	\frametitle{Bandgap test output}
+	\begin{figure}[ht]
+		\centering
+		\includegraphics[width=\textwidth]{03_Bandgap/04_Test.png}
+		\caption{Bandgap test output}
+	\end{figure}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Bandgap characteristics}
+	\begin{figure}[ht]
+		\centering
+		\resizebox{1\textwidth}{!}{\begin{tabular}{|p{3.5cm}|p{3.5cm}|p{3.5cm}|p{3.5cm}|}
+				\hline
+%				\rowcolor{lightgray}
+				\textbf{Description} &\textbf{Min}  &\textbf{Max} & \textbf{Unit} \\ \hline
+				
+				Bandgap voltage & 1.26 & 1.271 &\qty{}{\volt} \\ \hline
+				Current consumption & 27 & 40 & \qty{}{\micro\ampere} \\ \hline
+				Min voltage & 2.3& 2.8 & \qty{}{\volt} \\ \hline
+%				\caption{Bandgap characteristic} % needs to go inside longtable environment
+%				\label{tab:bandgap}
+		\end{tabular}}
+	\end{figure}
+\end{frame}
+
+
+
+\section{Oscillator}
+\begin{frame}
+	\frametitle{Oscillator schematic}
+	\begin{figure}[ht]
+		\centering
+		\includegraphics[width=\textwidth]{04_Clock/01_Oscillator_schematic.png}
+		\caption{Oscillator schematic}
+	\end{figure}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Oscillator test bench schematic}
+	\begin{figure}[ht]
+		\centering
+		\includegraphics[width=\textwidth]{04_Clock/02_Oscillator_tb_schematic.png}
+		\caption{Oscillator test bench schematic}
+	\end{figure}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Oscillator frequency vs voltage}
+	\begin{figure}[ht]
+		\centering
+		\includegraphics[width=\textwidth]{04_Clock/03_oscillator_frequency_vs_voltage_plot_compressed.pdf}
+		\caption{Oscillator frequency vs voltage}
+	\end{figure}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Oscillator test output}
+	\begin{figure}[ht]
+		\centering
+		\includegraphics[width=\textwidth]{04_Clock/04_Test.png}
+		\caption{Oscillator test output}
+	\end{figure}
+\end{frame}
+
+
+\begin{frame}
+	\frametitle{Oscillator characteristics}
+	\begin{figure}[ht]
+		\centering
+		\resizebox{1\textwidth}{!}{\begin{tabular}{|p{3.5cm}|p{3.5cm}|p{3.5cm}|p{3.5cm}|}
+				\hline
+				%				\rowcolor{lightgray}
+				\textbf{Description} &\textbf{Min}  &\textbf{Max} & \textbf{Unit} \\ \hline
+				
+				Frequency & 1.15 & 1.7 &\qty{}{\mega\hertz} \\ \hline
+				Current consumption & 35 & 50 & \qty{}{\micro\ampere} \\ \hline
+				Min voltage & 2& 3.187 & \qty{}{\volt} \\ \hline
+				%				\caption{Bandgap characteristic} % needs to go inside longtable environment
+				%				\label{tab:bandgap}
+		\end{tabular}}
+	\end{figure}
+\end{frame}
+
+
+
+\section{POR}
+\begin{frame}
+	\frametitle{POR schematic}
+	\begin{figure}[ht]
+		\centering
+		\includegraphics[width=\textwidth]{01_POR/03_por_schem.png}
+		\caption{POR schematic}
+	\end{figure}
+\end{frame}
+
+\begin{frame}
+	\frametitle{POR testbench schematic}
+	\begin{figure}[ht]
+		\centering
+		\includegraphics[width=\textwidth]{01_POR/02_por_tb_schem.png}
+		\caption{POR testbench schematic}
+	\end{figure}
+\end{frame}
+
+\begin{frame}
+	\frametitle{POR transient simulation}
+	\begin{figure}[ht]
+		\centering
+		\includegraphics[width=\textwidth]{01_POR/04_por_tran.pdf}
+		\caption{POR transient simulation}
+	\end{figure}
+\end{frame}
+
+\begin{frame}
+	\frametitle{POR test output}
+	\begin{figure}[ht]
+		\centering
+		\includegraphics[width=\textwidth]{01_POR/01_POR_test.png}
+		\caption{POR test output}
+	\end{figure}
+\end{frame}
+
+\begin{frame}
+	\frametitle{POR characteristics}
+	\begin{figure}[ht]
+		\centering
+		\resizebox{1\textwidth}{!}{\begin{tabular}{|p{3.5cm}|p{3.5cm}|p{3.5cm}|p{3.5cm}|}
+				\hline
+				%				\rowcolor{lightgray}
+				\textbf{Description} &\textbf{Min}  &\textbf{Max} & \textbf{Unit} \\ \hline
+				
+				input delay & 26 & 44 &\qty{}{\micro\second} \\ \hline
+				output delay & 4.4 & 6.8 &\qty{}{\micro\second} \\ \hline
+				Current consumption & 13 & 31 & \qty{}{\micro\ampere} \\ \hline
+				Min voltage & 3.176& 3.7 & \qty{}{\volt} \\ \hline
+				%				\caption{Bandgap characteristic} % needs to go inside longtable environment
+				%				\label{tab:bandgap}
+		\end{tabular}}
+	\end{figure}
+\end{frame}
+
+
+\section{SPI}
+\begin{frame}
+	\frametitle{SPI signal one}
+	\begin{figure}[ht]
+		\centering
+		\includegraphics[width=\textwidth]{06_SPI/01_write_to_reg_1_not_possible.png}
+		\caption{SPI signal one}
+	\end{figure}
+\end{frame}
+
+\begin{frame}
+	\frametitle{SPI signal two}
+	\begin{figure}[ht]
+		\centering
+		\includegraphics[width=\textwidth]{06_SPI/02_write_02_to_register_2.png}
+		\caption{SPI signal two}
+	\end{figure}
+\end{frame}
+
+\begin{frame}
+	\frametitle{SPI signal three}
+	\begin{figure}[ht]
+		\centering
+		\includegraphics[width=\textwidth]{06_SPI/03_write_03_to_register_2_miso_should_be_2.png}
+		\caption{SPI signal three}
+	\end{figure}
+\end{frame}
+
+\section{Overall}
+\begin{frame}
+	\frametitle{Overall without DC/DC}
+	\begin{figure}[ht]
+		\centering
+		\resizebox{1\textwidth}{!}{\begin{tabular}{|p{7.5cm}|p{2.5cm}|p{2.5cm}|p{2.5cm}|p{2.5cm}|}
+				\hline
+				%				\rowcolor{lightgray}
+				\textbf{Description} &\textbf{Min} &\textbf{Typ} &\textbf{Max} & \textbf{Unit} \\ \hline
+				
+				average current consumption analog blocks & 73.25 & 88.15 & 113.7 &\qty{}{\micro\ampere} \\ \hline
+				current ripple analog blocks & 10.9 & 13.94 & 18.86 & \qty{}{\micro\ampere} \\ 
+				\hline
+				total current consumption & ? & 89.74 & ? & \qty{}{\micro\ampere} \\ \hline
+				total current ripple & 27 & 34.22 & 46.42 &\qty{}{\milli\ampere} \\ \hline
+		\end{tabular}}
+	\end{figure}
+\end{frame}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+%----------------------------------------------------------------------------------------
+
+\end{document} 

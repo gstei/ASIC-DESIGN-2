@@ -1,0 +1,84 @@
+%\section{Aufgabenstellung}
+
+%\includepdf[pages=1-2, scale=0.5, frame=true]{Honegger_Jansky}
+%\includepdf[pages=1, scale=0.85, pagecommand={\thispagestyle{fancy}\section{Aufgabenstellung}}]{Honegger_Jansky}
+
+%\includepdf[pages=2, scale=0.85, pagecommand={\thispagestyle{fancy}}]{Honegger_Jansky}
+\section{Assignment}
+\label{chap:assignment}
+\subsection{Introduction}
+
+The goal of this project is to create a prototype \ac{ASIC} to be used inside a charging cradle for \ac{HI} from Sonova AG. The main objective for the \ac{ASIC} is to safely charge the \ac{HI} from a standard USB power cable. Since there are two \ac{HI} in a cradle, it must be possible to charge both \ac{HI} simultaneously at their maximum charging speed. There should be a serial port to read and write data to the chip, in allow for external monitoring and configuration. \newline
+
+In a first step the specification shall be created and a system design proposal with ideal components should be designed and simulated. To make the chip manufacturable, these ideal components shall one by one be replaced with implementable designs from libraries or custom made, while still being able to meet the specifications. Based on the system design a layout shall be created in such a way that an \ac{ASIC} can be manufactured.\newline
+
+Once the \ac{ASIC} has been manufactured and packaged, the chip shall be validated and characterized. The measured specifications shall be compared with the requirements. 
+
+\subsection{Technical Requirements}
+The main technical requirements of the \ac{ASIC} concern the charging of the \ac{HI}. The \ac{ASIC} should provide a constant voltage of \qty{5}{\volt} off of a \ac{USB} power supply, which can have a wide voltage range of \qty{4.3}{\volt} to \qty{5.3}{\volt}. As the input voltage can be higher or lower than the output, the charger must be able step up as well as step down the voltage. \newline Each \ac{HI} can pull a maximum charging current of \qty{80}{\milli\ampere}, the chip therefore needs to be able to supply around \qty{100}{\milli\ampere} per output, in order to have some margin. Additional functionalities and safety features are allowed but not a must.\newline
+
+\begin{table}[H]
+	\centering
+	\begin{tabular}{|c|c|}
+		Input Voltage Range & \qty{4.3}{\volt} - \qty{5.3}{\volt} \\
+		Output Voltage & \qty{4.9}{\volt}-\qty{5.1}{\volt} \\
+		Output Current & \qty{200}{\milli\ampere}\\
+	\end{tabular}
+	\caption{Main requirements for the charger \ac{ASIC}}
+	\label{tab:RequirementsIC}
+\end{table}
+
+The full technical requirements can be found in the attachments.
+
+
+\subsection{Background of Application}
+The project idea originally came from Sonova AG, therefore most of the requirements were provided by them. Since the scope of the requirements is large and it's not possible to fulfil all of them in the given time and with the given resources, the focus shall be on the basic functionalities mentioned above.
+\subsection{Scope of Work}
+\subsubsection{Project Thesis 1}
+\begin{itemize}
+	\item Literature study
+	\item Specifications
+	\item Verification
+	\item Design for test
+\end{itemize}
+\subsubsection{Project Thesis 2}
+\begin{itemize}
+	\item Layout
+	\item Post Layout Simulations
+	\item Tape out
+	\item Validation plan
+	\item PCB for validation
+	\item Validation
+	\item Test report
+\end{itemize}
+\subsection{Goals}
+\begin{itemize}
+	\item Getting familiar with the various tools required for \ac{ASIC} design
+	\item Document the project and provide reasoning for important design decisions
+	\item Understand and complete the entire \ac{ASIC} design flow consisting of:
+	\begin{itemize}
+		\item System design
+		\item Layout
+		\item Tape out
+		\item Validation
+		\item (optional) Redesign
+	\end{itemize}
+\end{itemize}
+\subsection{Mile stones}
+\begin{itemize}
+	\item {\makebox[5cm]{Project start:\hfill}23.09.2022}
+	\item {\makebox[5cm]{System Design:\hfill}14.07.2023}
+	\item {\makebox[5cm]{Delivery of report 1:\hfill}14.07.2023}
+	\item {\makebox[5cm]{Presentation one\hfill}10.07.2023}
+	\item {\makebox[5cm]{Tape out ready:\hfill}03.11.2023}
+	\item {\makebox[5cm]{Delivery of report 2:\hfill}21.06.2024}
+	\item {\makebox[5cm]{Presentation two\hfill}21.06.2024}
+\end{itemize}
+\subsection{Organization}
+\begin{itemize}
+	\item {\makebox[5cm]{Advisor:\hfill}Lars Kamm}
+	\item {\makebox[5cm]{Work place:\hfill}OST Rapperswil, room 8221}
+	\item {\makebox[5cm]{Meetings:\hfill}every two weeks}
+	\item {\makebox[5cm]{Document filing:\hfill} \textbackslash \textbackslash hsr.ch\textbackslash root\textbackslash auw\textbackslash sge\textbackslash studarbeiten\textbackslash MikroelSys\textbackslash MSE\textbackslash MSE\_22HS\_Jansky\_Meyer}
+\end{itemize}
+\clearpage

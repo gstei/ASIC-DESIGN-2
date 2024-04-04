@@ -1,0 +1,109 @@
+% Dokumentinformationen
+%Vorlage erstellt von Luca Mazzoleni aufbaudend auf der Vorlage von Stefan Reinli
+
+% !TeX program = pdflatex
+% !TeX encoding = utf8
+% !TeX spellcheck = en_En
+% !BIB program = bibtex
+
+\documentclass[
+11pt,
+final,
+twoside,
+a4paper]{article}
+%%%%
+%pachages to generate images
+
+
+% Document information
+\newcommand*{\Title}            {Design of a Fully Integrated Buck-Boost Converter ASIC}
+\newcommand*{\TitleInfo}        {A small buck-boost converter ASIC with integrated switches on a commercial 0.35 um process node for use in a charging case for hearing devices}
+\newcommand*{\AuthorOne}		{Matthias Meyer}
+\newcommand*{\AuthorTwo}		{Patrick Jansky}
+\newcommand*{\Author}			{\AuthorOne, \AuthorTwo}
+\newcommand*{\Prof}				{Prof. Dr. Paul Zbinden}
+\newcommand*{\Exam}             {Lars Kamm}
+\newcommand*{\Studiengang}		{Electrical Engineering (ElE) }
+\newcommand*{\Place}            {Rapperswil}
+\newcommand*{\LogoOST}          {\includegraphics[height = 1cm]{header/Ost_Logo}}
+\newcommand*{\LogoCompany}      {\includegraphics[height = 1cm]{header/logo}}
+%\newcommand*{\LogoInstitute}    {\includegraphics[height = 1cm]{header/ICOM_Logo_2.png}}
+\newcommand*{\Print}            {true} % true for black links (print version), false for color links (pdf version)
+
+% Header
+%Change the folliwing line in tikz
+\usepackage[subpreambles=true]{standalone}
+%\usepackage[mode=build]{standalone}
+%package to import images
+
+\usepackage{import}
+\include{header/header}
+%\include{header/codelayout}
+\setcounter{secnumdepth}{4}
+
+%\includeonly{sections/Einleitung,sections/Einleitung1,sections/Verzeichnisse}
+
+
+% tcolorbox setup
+\tcbset{width=(\linewidth-1mm)/2,before=,after=\hfill,arc=0mm,
+	colframe=red!50!black,colback=white,colback = red!10}
+
+\newcommand{\hsp}{\hspace{20pt}}
+\titleformat{\section}[hang]{\Huge\bfseries}{\thesection\hsp\textcolor{gray80}{|}\hsp}{0pt}{\Huge\bfseries}
+\titleformat{\subsection}[hang]{\huge\bfseries}{\thesubsection\hsp\textcolor{gray60}{|}\hsp}{0pt}{\Large\bfseries}
+\titleformat{\subsubsection}[hang]{\Large\bfseries}{\thesubsubsection\hsp\textcolor{gray40}{|}\hsp}{0pt}{\large\bfseries}
+\titleformat{\paragraph}[hang]{\large\bfseries}{\theparagraph\hsp\textcolor{gray20}{|}\hsp}{0pt}{\large\bfseries}
+
+% fontstyle
+%\renewcommand\familydefault{\sfdefault}    % Arial
+
+% Document=========================================
+\begin{document}
+    \pagenumbering{Roman}
+    \thispagestyle{empty}
+    \input{sections/titlepage/Titlepage}
+    \clearpage \pagebreak
+    \thispagestyle{empty}
+    %\listoftodos
+    \cleardoublepage \pagebreak
+    \pagenumbering{arabic}
+    \setcounter{page}{1}
+    \thispagestyle{empty}
+
+\newgeometry{left=2cm,right=4cm,top=1cm,bottom=1cm,headsep=1.5cm, marginparwidth=30mm,marginparsep=3mm,includeheadfoot}
+\savegeometry{margin}
+	\thispagestyle{empty}
+	\include{sections/abstract/Abstract}
+	\include{sections/danksagung/Danksagung}
+
+\newgeometry{left=2cm,right=2cm,top=1cm,bottom=1cm,headsep=1.5cm, marginparwidth=1mm,marginparsep=3mm,includeheadfoot} %Seitenränder Dokument ohne Titelblatt und Abstract
+
+
+
+\savegeometry{no-margin}
+	\begin{spacing}{1}
+		\startcontents[sections]
+		\printcontents[sections]{l}{1}{\setcounter{tocdepth}{4}\section*{Contents}}	
+	\end{spacing}
+	\cleardoublepage 
+	
+\loadgeometry{margin}
+	\include{sections/assignment/assignment.tex}
+	\include{sections/einleitung/Einleitung}
+	\include{sections/literaturstudie/Literaturstudie}
+	%\include{sections/DesignSchematic/DesignSchematic}
+	%\include{sections/DesignLayout/DesignLayout}
+	\include{sections/implementation/RegulatorDesign.tex}%to be deleted
+	\include{sections/specification/Specification.tex}
+	\include{sections/resultat/Resultat}
+	\include{sections/fazit/Fazit}
+	\include{sections/ausblick/Ausblick}
+	
+\loadgeometry{no-margin}
+	\include{sections/eigenstaendigkeitserklaerung/Eigenstaendigkeitserklaerung}
+	\include{sections/verzeichnisse/Verzeichnisse}
+	\pagestyle{appendix}
+	\include{sections/anhang/Anhang}
+	\include{sections/anhang/Anhang_nonprint}
+	\cleardoublepage
+\end{document}
