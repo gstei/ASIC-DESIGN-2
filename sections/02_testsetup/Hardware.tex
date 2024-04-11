@@ -1,0 +1,25 @@
+\subsection{Hardware}
+Our goal was to reproduce the same tests with the produced chip as we did to validate the design in the simulation. We therefore tried to create hardware that replicates the virtual test benches as close as possible. The dynamic regulation characteristics of the buck-boost converter are of particular interest such as load and line regulation as well as startup characteristics. 
+
+\begin{itemize}
+    \item Line regulation
+    \item Load regulation
+    \item Regulator accuracy 
+    \item Efficiency
+    \item Startup behavior
+    \item Short circuit behavior
+    \item SPI functionality
+\end{itemize}
+
+Going further with the test bench analogy, we split the test setup into two components, a test bench like PCB with call the Adapter PCB and the smaller \ac{DUT} PCBs we refer to as the Hats. We use one common Adapter PCB and different Hats to test different PCBs 
+
+
+\subsubsection{Adapter PCB}
+The main Adapter PCB contains the functionality of the test bench and has a common plug-in location for the DUT-Hats. The Adapter is designed in such a way, that the \ac{DUT} can be placed in the thermal chamber of the thermal airstream system TP04300A in oder to test the DUT functionality under various thermal conditions. The PCB contains four electronically controllable loads for load step measurements and contains current sense amplifiers to measure the current flowing in and out of the switching converter on the DUT. To test the SPI communication with the DUT we have included an Arduino Every Nano which allows us to use easily create a sketch to set registers on the DUT.
+
+
+\subsubsection{Hat PCB}
+In total we created three Hat PCBs which can be used as DUTs. For our chip we created one pcb with the chip socketed and one with QFN package soldered to the board and one with a commercially available IC. The socketed version allows for the quick characterization of multiple chips and the variance of characteristics over the batch. The socket however introduces higher lead resistance and inductance as well as higher thermal isolation of the chip to PCB. We do not expect these factors to make a major difference for the characteristics we want to test, but we decided still to create a PCB with the chip directly soldered to the PCB. This allows us to verify our assumption and gives us a fallback, if our assumption turns out to be false and chip does not function correctly when socketed. \\
+
+Our reasoning to create a Hat with a commercially available chip is two fold. First it allows us to test our test setup on real hardware before we received our fabricated chip and also gives us a baseline to compare our chip against. For the commercially available IC we decided to use the TPS63900 from Texas Instruments. This IC is quite similar as it also uses integrated switches in the standard cascaded-buck-boost converter topology and features similar input/output voltage and current supply capabilities. 
+
