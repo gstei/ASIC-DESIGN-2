@@ -40,6 +40,7 @@ The primary test setup utilized the PXI system from National Instruments (NI). T
     \item \textbf{TP04300}: This is the thermostreamer used to control the temperature of the chip.
     \item \textbf{PXI-6363}: This is a GPIO controller used to control the reset of the chip and the different load resistors.
     \item \textbf{NGE-100}: This is a power supply to provide the power for the test circuit.
+    \item \textbf{FTDI C232HM-DDHSL-0}: This is a USB to SPI converter used to control the chip.
 \end{itemize}
 
 An overview of all the instruments can be seen in Figure \autoref{fig:overview}.
@@ -61,4 +62,17 @@ Pylint is a static code analysis tool for Python, adhering to the style guidelin
 \paragraph{Flake8}
 \label{Par:Flake8}
 Flake8 is a Python linting tool that scans Python codebases for errors, style inconsistencies, and complexity. It consists of three underlying tools: PyFlakes for error checking, McCabe for complexity analysis, and pycodestyle for style conformity with PEP8 guidelines. Flake8 stands out due to its extensive plugin ecosystem, allowing users to augment its capabilities and address a wide range of issues and concerns in Python code\cite{flake8}.
+
+
+\subsubsection{SPI Interface}
+The registers of the chip can be controlled over a SPI interface, therefore a SPI Master was needed.
+It was therefore decided to implemented the SPI master using the FTDI C232HM-DDHSL-0 USB to SPI converter. The FTDI chip was chosen due to its ease of use and the availability of drivers for Python. But it finally turned out that the SPI mode 1 which was implemented on the chip does not exactly correspond to SPI mode 1 implemented on the FTDI Chip. On the FTDI Chip the CS and the first SPI clock edge are turned on on the same time, but on the tesbench used in the simulation to verify the digital part of the chip this was not the case and due to its implementaion the finite state machine only works when the CS is turned on before the first clock edge as it is also visible in Figure \autoref{fig:spi_modes} (CPOL=0, CPHA=1). Therefore a custom driver was implemented which only works with a 1kHz instead of 500kHz Clock, but since we only need to write eight different register this does not really matter.
+
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.8\textwidth]{../ASIC-DESIGN-2/images/04_spi/SPI_timing_diagram_CS.svg.png}
+    \caption{SPI Modes \cite{Wikipedia:SPI}}
+    \label{fig:spi_modes}
+\end{figure}
 
