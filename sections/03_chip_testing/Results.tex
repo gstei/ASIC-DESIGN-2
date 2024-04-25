@@ -1,4 +1,81 @@
 \section{Results}
+\subsection{SPI Interface}
+On the SPI interface one should be able to succesfully wirite and read back registers. Furthermore depending on the registers different analog and digital signals should be routed to the output pins.
+\subsection{POR}
+\begin{longtable}{|p{3.5cm}|p{3.5cm}|p{3.5cm}|p{3.5cm}|}
+	\hline
+	\rowcolor{lightgray}
+	\textbf{Description} &\textbf{Min} &\textbf{Max} & \textbf{Unit} \\ \hline
+	
+	input delay & 26 & 44 &\qty{}{\micro\second} \\ \hline
+	output delay & 4.4 & 6.8 &\qty{}{\micro\second} \\ \hline
+	Current consumption & 13 & 31 & \qty{}{\micro\ampere} \\ \hline
+	Min voltage & 3.176& 3.7 & \qty{}{\volt} \\ \hline
+	\caption{POR characteristic} % needs to go inside longtable environment
+	\label{tab:por}
+\end{longtable}
+\subsection{Bandgap}
+\begin{longtable}{|p{3.5cm}|p{3.5cm}|p{3.5cm}|p{3.5cm}|}
+	\hline
+	\rowcolor{lightgray}
+	\textbf{Description} &\textbf{Min} &\textbf{Max} & \textbf{Unit} \\ \hline
+	
+	Bandgap voltage & 1.226 & 1.277 &\qty{}{\volt} \\ \hline
+	Current consumption & 16.73 & 23.53 & \qty{}{\micro\ampere} \\ \hline
+	Min voltage & 2.3& 2.9 & \qty{}{\volt} \\ \hline
+	\caption{Bandgap characteristic} % needs to go inside longtable environment
+	\label{tab:bandgap}
+\end{longtable}
+\begin{figure}[ht]
+	\centering
+	\includegraphics[width=\textwidth]{images/05_bandgap/band_volt.pdf}
+	\caption{Bandgap voltage vs temperature simulated}
+	\label{fig:bandgap_voltage_vs_temp}
+\end{figure}
+\begin{figure}[ht]
+	\centering
+	\includegraphics[width=\textwidth]{images/05_bandgap/band_volt_mc.pdf}
+	\caption{Bandgap voltage Monte Carlo simulation (param.scs=3s, xh035.scs=mcg)}
+	\label{fig:bandgap_voltage_mc}
+\end{figure}
+\clearpage
+\subsection{Current Source}
+
+\begin{longtable}{|p{3.5cm}|p{3.5cm}|p{3.5cm}|p{3.5cm}|}
+	\hline
+	\rowcolor{lightgray}
+	\textbf{Description} &\textbf{Min} &\textbf{Max} & \textbf{Unit} \\ \hline
+	
+	Reference current & 8.4 & 13.5 &\qty{}{\micro\ampere} \\ \hline
+	Current consumption & 50 & 81 & \qty{}{\micro\ampere} \\ \hline
+	Min voltage (voltage where the trans resistance ($\frac{\Delta V_{in}}{\Delta I_{out}}$) is higher than \qty{1}{\mega\ohm}) & 3& 3.33 & \qty{}{\volt} \\ \hline
+	\caption{Current reference characteristics} % needs to go inside longtable environment
+	\label{tab:bootstrap}
+\end{longtable}
+\begin{figure}[ht]
+	\centering
+	
+	\resizebox{1\textwidth}{!}{\includegraphics{images/06_current_ref/ref_cur_mont.pdf}}
+	\caption{Monte Carlo distribution of Current reference. X-axis shows current through \glqq IPRB0\grqq{} in \autoref{fig:ref_cur_sim_schem} (param.scs=3s, xh035.scs=mcg)}
+	\label{fig:ref_cur_mont}
+\end{figure}
+\clearpage
+\subsection{Oscillator}
+\begin{longtable}{|p{3.5cm}|p{3.5cm}|p{3.5cm}|p{3.5cm}|}
+	\hline
+	\rowcolor{lightgray}
+	\textbf{Description} &\textbf{Min} &\textbf{Max} & \textbf{Unit} \\ \hline
+	
+	Frequency & 1.15 & 1.7 &\qty{}{\mega\hertz} \\ \hline
+	Current consumption & 35 & 50 & \qty{}{\micro\ampere} \\ \hline
+	Min voltage & 2& 3.187 & \qty{}{\volt} \\ \hline
+	\caption{Specification} % needs to go inside longtable environment
+	\label{tab:osc}
+\end{longtable}
+
+\clearpage
+
+
 
 
 \foreach \i in {../ASIC-DESIGN-2/images/03_plots/DCDC Reset Test with 4.3V and resistor R2\, 70°C} {
