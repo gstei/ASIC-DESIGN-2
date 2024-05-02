@@ -1,4 +1,5 @@
 \section{Results}
+On the SPI interface one should be able to successfully write and read back registers. Therefore a complete SPI driver was written in python which allows to simply mux out the wanted analog/digital signal, change the clock frequency and read back the register values. An overview of the registers can be found bellow whereby register 7 is not connected to anything and therefore not listed in \autoref{tab:reg_des}.
 \subsection{SPI Interface}
 \begin{longtable}{|p{3.5cm}|p{10.5cm}|}
 	\hline
@@ -9,13 +10,15 @@
     2 & analog mux $<20:16>$ 0=ground, 1=iboot ref, 2=vbgp, 3=output error amplifier, 4=ground,  5= ground \\ \hline
 	3 & current limit tune $<27:25>$, current limit tune enable $<24>$ \\ \hline
 	4 & output voltage fb $<32>$ \\ \hline
-	5 & Freq tune digital part $<42:40>$ can add up to 3 caps eq sized caps to saw tooth ==> clock 4 times slower \\ \hline
-    6 & Freq tune linear regulator$<50:48>$ can add up to 3 caps eq sized caps to saw tooth ==> clock 4 times slower, dig out$<47>$ ==> enable clock on digital pad \\ \hline
-	\caption{Bandgap characteristic} % needs to go inside longtable environment
-	\label{tab:bandgap}
+	5 & Freq tune digital part $<42:40>$ can add up to 3 caps eq sized caps to saw tooth ==> clock 4 times slower, dig out$<47>$ ==> enable clock on digital pad\\ \hline
+    6 & Freq tune linear regulator$<50:48>$ can add up to 3 caps eq sized caps to saw tooth ==> clock 4 times slower \\ \hline
+	\caption{Register description} % needs to go inside longtable environment
+	\label{tab:reg_des}
 \end{longtable}
-On the SPI interface one should be able to succesfully wirite and read back registers. Furthermore depending on the registers different analog and digital signals should be routed to the output pins.
+Since the the SPI communication is working as in the testbench and the testscript is available in the git repository. No further test results are listed here. But one thing that one has to be aware of when one wants to control the chip is that the CS line has to be activated before the first clock edge arrives otherwise the communication will not work as mentioned in \autoref{subsubsec:SPI}.
+
 \subsection{POR}
+According to the simulation the power on reset has the following characteristics as shown in \autoref{tab:por}. Thereby in the test the focus was set on the min voltage where the POR turns on the voltage. Thereby a pull up was set to the output of the analog test pin. As soon as the POR disables the reset the analog test pin is driven to zero and this is therefore visible. It thereby turned out that the POR turns on at a voltage of \textcolor{red}{\qty{3.3}{\volt}} which is in the range of the simulation. 
 \begin{longtable}{|p{3.5cm}|p{3.5cm}|p{3.5cm}|p{3.5cm}|}
 	\hline
 	\rowcolor{lightgray}
@@ -29,6 +32,7 @@ On the SPI interface one should be able to succesfully wirite and read back regi
 	\label{tab:por}
 \end{longtable}
 \subsection{Bandgap}
+The bandgap characteristics from the simulation can be seen in \autoref{tab:bandgap}, \autoref{fig:bandgap_voltage_vs_temp} and \autoref{fig:bandgap_voltage_mc}. The measurements have thereby shown that the bandgap voltage is in the range of of the simulation. As it can be seen in \textcolor{red}{graphic}. About the other parameters no measurements could be done since the bandgap is not directly accessible.
 \begin{longtable}{|p{3.5cm}|p{3.5cm}|p{3.5cm}|p{3.5cm}|}
 	\hline
 	\rowcolor{lightgray}
@@ -54,7 +58,7 @@ On the SPI interface one should be able to succesfully wirite and read back regi
 \end{figure}
 \clearpage
 \subsection{Current Source}
-
+The current source characteristics from the simulation can be seen in \autoref{tab:current_source} and \autoref{fig:current_source}. The measurements have thereby shown that the current source is in the range of of the simulation. The current was measured for one chip and its value was thereby \textcolor{red}{10 micro ampere}. About the other parameters no measurements could be done since the current source is not directly accessible.
 \begin{longtable}{|p{3.5cm}|p{3.5cm}|p{3.5cm}|p{3.5cm}|}
 	\hline
 	\rowcolor{lightgray}
@@ -75,6 +79,7 @@ On the SPI interface one should be able to succesfully wirite and read back regi
 \end{figure}
 \clearpage
 \subsection{Oscillator}
+The oscillator characteristics from the simulation can be seen in \autoref{tab:osc} and \autoref{fig:osc}. The measurements have thereby shown that the oscillator is in the range of of the simulation. The frequency was measured for one chip and its value was thereby \textcolor{red}{1.5 \qty{}{\mega\hertz}}. About the other parameters no measurements could be done since the oscillator is not directly accessible. Furthermore the frequency could also be tuned in the range of \textcolor{red}{x to y} over the spi registers. 
 \begin{longtable}{|p{3.5cm}|p{3.5cm}|p{3.5cm}|p{3.5cm}|}
 	\hline
 	\rowcolor{lightgray}
