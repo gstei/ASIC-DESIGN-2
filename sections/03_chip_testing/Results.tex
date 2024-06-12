@@ -94,6 +94,43 @@ The oscillator characteristics from the simulation can be seen in \autoref{tab:o
 
 \clearpage
 
+\subsection{Buck-Boost Converter}
+\subsubsection{Load Step Response}
+The response to a load step is satisfactory and can be seen \autoref{fig:loadstep}. The regulation behavior is similar to the simulated response, but the measured controller has a higher bandwidth as can be seen in the faster response and is slightly overcompensated as it lacks the single oscillatory peak seen in the simulated response. Based on this response we estimate the implemented system has the following characteristics:
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|c|c|c|}
+        Characteristic & Measured System & Simulation \\
+        \hline
+         Phase Margin  & \qty{55}{\degree} & \qty{45}{\degree}\\
+		 Crossover Frequency & \qty{30}{\kilo\hertz} & \qty{20}{\kilo\hertz}  \\
+    \end{tabular}
+    \caption{Estimated regulator characteristics based on the response to a 200 mA load step}
+    \label{tab:regChar}
+\end{table}
+
+\begin{figure}[ht]
+	\centering
+	
+	\resizebox{1\textwidth}{!}{\includegraphics{images/07_DCDC/LoadStepVergleich.png}}
+	\caption{Load regulation to a 200 mA load step for comparison between measured response and simulated response. Simulated response offset to remove constant load regulation error. Dark Blue: $V_{OUT}$ measured; Light Blue: $V_{OUT}$ simulated; Pink: $I_{OUT}$ measured}
+	\label{fig:loadstep}
+\end{figure}
+\clearpage
+
+\subsubsection{Load Regulation}
+\begin{figure}[ht]
+	\centering
+	\resizebox{1\textwidth}{!}{\includegraphics{images/07_DCDC/LoadSteadyState0mA.png}}
+	\caption{Steady state load regulation with a 0mA load. Dark Blue: $V_{OUT}$; Pink: $I_{OUT}$}
+\end{figure}
+\begin{figure}[ht]
+	\centering
+	\resizebox{1\textwidth}{!}{\includegraphics{images/07_DCDC/LoadSteadyState200mA.png}}
+	\caption{Steady state load regulation with a 200mA load. Dark Blue: $V_{OUT}$; Pink: $I_{OUT}$}
+\end{figure}
+\clearpage
 
 
 
