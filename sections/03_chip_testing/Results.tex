@@ -95,6 +95,12 @@ The oscillator characteristics from the simulation can be seen in \autoref{tab:o
 \clearpage
 
 \subsection{Buck-Boost Converter}
+
+\subsubsection{Startup}
+\label{sec:startup}
+
+
+
 \subsubsection{Load Step Response}
 The response to a load step is satisfactory and can be seen \autoref{fig:loadstep}. The regulation behavior is similar to the simulated response, but the measured controller has a higher bandwidth as can be seen in the faster response and is slightly overcompensated as it lacks the single oscillatory peak seen in the simulated response. Based on this response we estimate the implemented system has the following characteristics:
 
@@ -120,6 +126,7 @@ The response to a load step is satisfactory and can be seen \autoref{fig:loadste
 \clearpage
 
 \subsubsection{Load Regulation}
+\label{sec:loadRegulation}
 \begin{figure}[ht]
 	\centering
 	\resizebox{1\textwidth}{!}{\includegraphics{images/07_DCDC/LoadSteadyState0mA.png}}
