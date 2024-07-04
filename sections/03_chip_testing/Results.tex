@@ -32,7 +32,7 @@ According to the simulation the power on reset has the following characteristics
 	\label{tab:por}
 \end{longtable}
 \subsection{Bandgap}
-The bandgap characteristics from the simulation can be seen in \autoref{tab:bandgap}, \autoref{fig:bandgap_voltage_vs_temp} and \autoref{fig:bandgap_voltage_mc}. The measurements have thereby shown that the bandgap voltage is in the range of of the simulation. As it can be seen in \textcolor{red}{graphic}. About the other parameters no measurements could be done since the bandgap is not directly accessible.
+The bandgap characteristics from the simulation can be seen in \autoref{tab:bandgap}, \autoref{fig:bandgap_voltage_vs_temp} and \autoref{fig:bandgap_voltage_mc}. The measurements have thereby shown that the bandgap voltage is in the range of of the simulation, the mean value is just shifted by 10mV. As it can be seen in \autoref{fig:bandgap_voltage_distrb}. About the other parameters like the current consumption and the min voltage no measurements could be done since the band gap is not directly accessible.
 \begin{longtable}{|p{3.5cm}|p{3.5cm}|p{3.5cm}|p{3.5cm}|}
 	\hline
 	\rowcolor{lightgray}
@@ -50,6 +50,13 @@ The bandgap characteristics from the simulation can be seen in \autoref{tab:band
 	\caption{Bandgap voltage vs temperature simulated}
 	\label{fig:bandgap_voltage_vs_temp}
 \end{figure}
+\begin{figure}[ht]
+	\centering
+	\includegraphics[width=\textwidth]{images/Bandgap_Voltage_Distribution.png}
+	\caption{Bandgap voltage distribution at 22 degree Celsius}
+	\label{fig:bandgap_voltage_distrb}
+\end{figure}
+
 \begin{figure}[ht]
 	\centering
 	\includegraphics[width=\textwidth]{images/05_bandgap/band_volt_mc.pdf}
@@ -77,6 +84,12 @@ The current source characteristics from the simulation can be seen in \autoref{t
 	\caption{Monte Carlo distribution of Current reference. X-axis shows current through \glqq IPRB0\grqq{} in \autoref{fig:ref_cur_sim_schem} (param.scs=3s, xh035.scs=mcg)}
 	\label{fig:ref_cur_mont}
 \end{figure}
+\begin{figure}[ht]
+	\centering
+	\includegraphics[width=\textwidth]{images/Current_Reference_Distribution.png}
+	\caption{Current source distribution at 22° degree Celsius}
+	\label{fig:current_source_distr}
+\end{figure}
 \clearpage
 \subsection{Oscillator}
 The oscillator characteristics from the simulation can be seen in \autoref{tab:osc} and \autoref{fig:osc}. The measurements have thereby shown that the oscillator is in the range of of the simulation. The frequency was measured for one chip and its value was thereby \textcolor{red}{1.5 \qty{}{\mega\hertz}}. About the other parameters no measurements could be done since the oscillator is not directly accessible. Furthermore the frequency could also be tuned in the range of \textcolor{red}{x to y} over the spi registers. 
@@ -93,6 +106,7 @@ The oscillator characteristics from the simulation can be seen in \autoref{tab:o
 \end{longtable}
 
 \clearpage
+
 
 \subsection{Buck-Boost Converter}
 
