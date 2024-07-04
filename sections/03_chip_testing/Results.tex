@@ -18,21 +18,22 @@ On the SPI interface one should be able to successfully write and read back regi
 Since the the SPI communication is working as in the testbench and the testscript is available in the git repository. No further test results are listed here. But one thing that one has to be aware of when one wants to control the chip is that the CS line has to be activated before the first clock edge arrives otherwise the communication will not work as mentioned in \autoref{subsubsec:SPI}.
 
 \subsection{POR}
-According to the simulation the power on reset has the following characteristics as shown in \autoref{tab:por}. Thereby in the test the focus was set on the min voltage where the POR turns on the voltage. Thereby a pull up was set to the output of the analog test pin. As soon as the POR disables the reset the analog test pin is driven to zero and this is therefore visible. It thereby turned out that the POR turns on at a voltage of \textcolor{red}{\qty{3.3}{\volt}} which is in the range of the simulation. 
-\begin{longtable}{|p{3.5cm}|p{3.5cm}|p{3.5cm}|p{3.5cm}|}
+According to the simulation, the power-on reset (POR) exhibits the characteristics depicted in \autoref{tab:por}. The POR measurement was conducted on a single random sample at room temperature. To measure the characteristics from the simulation, a pull-up resistor was connected to the output of the analog test pin as the test pin exhibits high impedance when the chip is unpowered and is grounded when the chip is powered (as long as the analog test pint was not configured differently over the SPI).
+Consequently, when the chip gets powered and reaches a voltage over the minimum voltage of the POR, the analog test pin is driven to zero and this change is observable. Due to that it turned out that the minimum voltage of the POR is \qty{3.72}{\volt} which is \qty{0.02}{\volt} more than the upper corner of the Simulation. Since the time was limited and the deviation is very small no further investigations were made on that. The input and output delay where measured the same way and it turned out that those values are inside the corners of the simulations. For the input delay a value of \qty{40}{\micro\second} was measured which is the time from which the input voltage is over over  \qty{3.72}{\volt} and the analog test pin is driven to ground. The other way around a value of \qty{6.5}{\micro\second} was measured as it can be also seen in \autoref{tab:por} column four.
+\begin{longtable}{|p{2.5cm}|p{2.5cm}|p{2.5cm}|p{2.5cm}|p{2.5cm}|}
 	\hline
 	\rowcolor{lightgray}
-	\textbf{Description} &\textbf{Min} &\textbf{Max} & \textbf{Unit} \\ \hline
+	\textbf{Description} &\textbf{Min.} &\textbf{Max.} & \textbf{Mes.} & \textbf{Unit} \\ \hline
 	
-	input delay & 26 & 44 &\qty{}{\micro\second} \\ \hline
-	output delay & 4.4 & 6.8 &\qty{}{\micro\second} \\ \hline
-	Current consumption & 13 & 31 & \qty{}{\micro\ampere} \\ \hline
-	Min voltage & 3.176& 3.7 & \qty{}{\volt} \\ \hline
+	input delay & 26 & 44 & 40  &\qty{}{\micro\second} \\ \hline
+	output delay & 4.4 & 6.8 & 6.5 &\qty{}{\micro\second} \\ \hline
+	Current consumption & 13 & 31 & -& \qty{}{\micro\ampere} \\ \hline
+	Min voltage & 3.176& 3.7 & 3.72 & \qty{}{\volt} \\ \hline
 	\caption{POR characteristic} % needs to go inside longtable environment
 	\label{tab:por}
 \end{longtable}
 \subsection{Bandgap}
-The bandgap characteristics from the simulation can be seen in \autoref{tab:bandgap}, \autoref{fig:bandgap_voltage_vs_temp} and \autoref{fig:bandgap_voltage_mc}. The measurements have thereby shown that the bandgap voltage is in the range of of the simulation, the mean value is just shifted by 10mV. As it can be seen in \autoref{fig:bandgap_voltage_distrb}. About the other parameters like the current consumption and the min voltage no measurements could be done since the band gap is not directly accessible.
+The bandgap characteristics from the simulation can be seen in \autoref{tab:bandgap}, \autoref{fig:bandgap_voltage_vs_temp} and \autoref{fig:bandgap_voltage_mc}. The measurements have thereby shown that the bandgap voltage is in the range of of the simulation, the mean value is just shifted by 10mV. As it can be seen in the comparison of \autoref{fig:bandgap_voltage_distrb} and \autoref{fig:bandgap_voltage_mc}. Furthermore due to the fact that the reference current is slightly to high the center of the bandgap vs temperature curve is not anymore at \qty{40}{\degreeCelsius} but at about \qty{55}{\degreeCelsius} as it can be seen in the comparison of \autoref{fig:bandgap_voltage_vs_temp} and \autoref{fig:bandgap_voltage_vs_temp_mes}. About the other parameters like the current consumption and the min voltage no measurements could be done since the band gap is not directly accessible.
 \begin{longtable}{|p{3.5cm}|p{3.5cm}|p{3.5cm}|p{3.5cm}|}
 	\hline
 	\rowcolor{lightgray}
@@ -52,8 +53,14 @@ The bandgap characteristics from the simulation can be seen in \autoref{tab:band
 \end{figure}
 \begin{figure}[ht]
 	\centering
+	\includegraphics[width=\textwidth]{images/05_bandgap/Bandgap.png}
+	\caption{Bandgap voltage vs temperature measured}
+	\label{fig:bandgap_voltage_vs_temp_mes}
+\end{figure}
+\begin{figure}[ht]
+	\centering
 	\includegraphics[width=\textwidth]{images/Bandgap_Voltage_Distribution.png}
-	\caption{Bandgap voltage distribution at 22 degree Celsius}
+	\caption{Bandgap voltage distribution at \qty{22}{\degreeCelsius} and 5V}
 	\label{fig:bandgap_voltage_distrb}
 \end{figure}
 
@@ -65,7 +72,8 @@ The bandgap characteristics from the simulation can be seen in \autoref{tab:band
 \end{figure}
 \clearpage
 \subsection{Current Source}
-The current source characteristics from the simulation can be seen in \autoref{tab:current_source} and \autoref{fig:current_source}. The measurements have thereby shown that the current source is in the range of of the simulation. The current was measured for one chip and its value was thereby \textcolor{red}{10 micro ampere}. About the other parameters no measurements could be done since the current source is not directly accessible.
+The current source characteristics from the simulation can be seen in \autoref{tab:current_source} and \autoref{fig:ref_cur_mont}. The measurements have thereby shown that the current source is not in the range of of the simulation. The current measured is about \qty{4}{\micro\ampere} higher than the one simulated which corresponds to a derivation of $\left|\frac{\qty{14.3}{\micro\ampere}-\qty{10.3}{\micro\ampere}}{\qty{10.3}{\micro\ampere}}\right|\cdot 100\approx 38.8 \%$. An exact explanation for this behavior was not found, but since the oscillator has the same deviation and is independently of the current source the deviation most probably comes from the \glqq rmp1\grqq resistors since those were used in the layout of the oscillator and the current reference.
+The current measured can be seen in \autoref{fig:current_source_distr}. About the other parameters no measurements could be done since the current source is not directly accessible.
 \begin{longtable}{|p{3.5cm}|p{3.5cm}|p{3.5cm}|p{3.5cm}|}
 	\hline
 	\rowcolor{lightgray}
@@ -75,11 +83,10 @@ The current source characteristics from the simulation can be seen in \autoref{t
 	Current consumption & 50 & 81 & \qty{}{\micro\ampere} \\ \hline
 	Min voltage (voltage where the trans resistance ($\frac{\Delta V_{in}}{\Delta I_{out}}$) is higher than \qty{1}{\mega\ohm}) & 3& 3.33 & \qty{}{\volt} \\ \hline
 	\caption{Current reference characteristics} % needs to go inside longtable environment
-	\label{tab:bootstrap}
+	\label{tab:current_source}
 \end{longtable}
 \begin{figure}[ht]
 	\centering
-	
 	\resizebox{1\textwidth}{!}{\includegraphics{images/06_current_ref/ref_cur_mont.pdf}}
 	\caption{Monte Carlo distribution of Current reference. X-axis shows current through \glqq IPRB0\grqq{} in \autoref{fig:ref_cur_sim_schem} (param.scs=3s, xh035.scs=mcg)}
 	\label{fig:ref_cur_mont}
@@ -87,23 +94,51 @@ The current source characteristics from the simulation can be seen in \autoref{t
 \begin{figure}[ht]
 	\centering
 	\includegraphics[width=\textwidth]{images/Current_Reference_Distribution.png}
-	\caption{Current source distribution at 22° degree Celsius}
+	\caption{Current source distribution at \qty{22}{\degreeCelsius} and 5V}
 	\label{fig:current_source_distr}
 \end{figure}
 \clearpage
 \subsection{Oscillator}
-The oscillator characteristics from the simulation can be seen in \autoref{tab:osc} and \autoref{fig:osc}. The measurements have thereby shown that the oscillator is in the range of of the simulation. The frequency was measured for one chip and its value was thereby \textcolor{red}{1.5 \qty{}{\mega\hertz}}. About the other parameters no measurements could be done since the oscillator is not directly accessible. Furthermore the frequency could also be tuned in the range of \textcolor{red}{x to y} over the spi registers. 
+The oscillator characteristics from the simulation can be seen in \autoref{tab:osc}. The measurements have thereby shown that the oscillator is not in the range of of the simulation, when there is no configuration made over the SPI one has a nominal frequency of \qty{2.63}{\mega\hertz}, whereas in the simulation one had \qty{1.7}{\mega\hertz}, which results in an deviation of $\left|\frac{\qty{2.63}{\mega\hertz}-\qty{1.7}{\mega\hertz}}{\qty{1.7}{\mega\hertz}}\right|\cdot 100\approx 54.7 \%$, which is even more than in the current reference. About the other parameters no measurements could be done since the oscillator is not directly accessible. Furthermore the frequency can also be tuned in the range of \qty{1.17}{\mega\hertz} to \qty{2.63}{\mega\hertz} over the spi registers (measured values) which results in the frequencies which can be seen in \autoref{tab:freq}. 
 \begin{longtable}{|p{3.5cm}|p{3.5cm}|p{3.5cm}|p{3.5cm}|}
 	\hline
 	\rowcolor{lightgray}
 	\textbf{Description} &\textbf{Min} &\textbf{Max} & \textbf{Unit} \\ \hline
 	
-	Frequency & 1.15 & 1.7 &\qty{}{\mega\hertz} \\ \hline
+	Frequency & 1.15 & 1.8 &\qty{}{\mega\hertz} \\ \hline
 	Current consumption & 35 & 50 & \qty{}{\micro\ampere} \\ \hline
 	Min voltage & 2& 3.187 & \qty{}{\volt} \\ \hline
 	\caption{Specification} % needs to go inside longtable environment
 	\label{tab:osc}
 \end{longtable}
+\begin{table}[h]
+	\centering
+	\begin{tabular}{|c|c|}
+		\hline
+		\rowcolor{lightgray}
+		Index & Frequency (MHz) \\
+		\hline
+		0 & \qty{2.63}{\mega\hertz} \\
+		\hline
+		1 & \qty{2.3}{\mega\hertz} \\
+		\hline
+		2 & \qty{2.19}{\mega\hertz} \\
+		\hline
+		3 & \qty{1.85}{\mega\hertz} \\
+		\hline
+		4 & \qty{1.67}{\mega\hertz} \\
+		\hline
+		5 & \qty{1.43}{\mega\hertz} \\
+		\hline
+		6 & \qty{1.27}{\mega\hertz} \\
+		\hline
+		7 & \qty{1.17}{\mega\hertz} \\
+		\hline
+	\end{tabular}
+	\caption{Sorted Frequencies}
+	\label{tab:freq}
+\end{table}
+
 
 \clearpage
 
@@ -172,7 +207,8 @@ The response to a load step is satisfactory and can be seen \autoref{fig:loadste
     \end{figure}
     
 }
-\subsubsection{Efficiency}
+\subsubsection{Power consumption and Efficiency}
+For the power consumption when 
 The efficiency of the TI chip was measured at different input voltages and loads. The efficiency was thereby callculated by difiding the output power by the input power. The results can be seen in \autoref{fig:efficiency TI chip}.
 \begin{figure}[h]
     \centering
