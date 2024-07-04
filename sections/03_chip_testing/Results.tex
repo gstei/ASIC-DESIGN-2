@@ -110,9 +110,18 @@ The oscillator characteristics from the simulation can be seen in \autoref{tab:o
 
 \subsection{Buck-Boost Converter}
 
-\subsubsection{Startup}
+\subsubsection{Start-up}
 \label{sec:startup}
+The start-up behavior shows significant differences to the results observed in simulations. Instead of the expected gradual increase in the output voltage, we observed the output voltage increase in distinct steps as can be seen in \autoref{fig:startup}. These distinct steps stem from the fact the input voltage collapses cyclicly to under the limit given by the \ac{POR}. The cycle can be described as the chip starting up and increasing the input current until the input voltage drops to bellow the limit given by the \ac{POR} thus disabling the chip and causing the input voltage to rise until the chip starts up again. The cycle continues until the output voltage reaches close to the nominal level and the outer voltage control loop regulates the current.  
+The underlying issue is a misconfiguration of the internal registers causing the current limit to be disabled on start-up and the converter increasing the inductor current $I_L$ to unsustainable levels leading to the collapse of the input voltage. The cause is further described in \autoref{sec:missingcurrentlimit}.
 
+\begin{figure}[ht]
+	\centering
+	
+	\resizebox{1\textwidth}{!}{\includegraphics{images/07_DCDC/StartUp.PNG}}
+	\caption{Start-up behavior without an attached load. Dark Blue: $V_{IN}$ measured; Pink: $V_{OUT}$ measured}
+	\label{fig:startup}
+\end{figure}
 
 
 \subsubsection{Load Step Response}

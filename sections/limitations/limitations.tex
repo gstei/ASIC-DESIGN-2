@@ -9,6 +9,7 @@ In the implementation of the circuit we mistakenly shorted the inverting amplifi
 This issue could have various knock-on effects like the discontinuous regulation we observed in \autoref{sec:loadRegulation} but we could not prove this conclusively. The described issue could also exacerbate the issues with the start-up behavior as the large input current during start-up lead to a voltage differential between $V_{DDL}$ and $V_{IN}$. Compounding the large voltage transients on $V_{DDL}$ during start-up get differently attenuated by the off-chip bypassing on each power-rail leading to unmeasurable dynamic errors in the current measurement.
 
 \subsubsection{Default Register Settings Disables Current Limit}
+\label{sec:missingcurrentlimit}
 
 A misconfiguration of the default state in the internal registers turn's off the current limit for the converter. This causes the converter to start operating without an effective current limit and leads to the converter to pulling so much current that the supply collapses to under the limit set by the \ac{POR}. This behavior is documented in \autoref{sec:startup}. The current limit can be enabled after start-up and works as intended, but as the settings are stored in non-persistent memory, they are lost after restart and the chip therefore cannot start up with the current limit enabled. 
 
