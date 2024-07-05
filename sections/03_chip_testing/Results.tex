@@ -7,11 +7,11 @@ On the SPI interface one should be able to successfully write and read back regi
 	\textbf{Register Number} &\textbf{Function} \\ \hline
 	0 & stores the last spi command $<7:0>$\\ \hline
     1 & read only register with following value: b0=1, b1=0, b2=1, b3=0, b4=0, b5=0, b6=0, b7=0 <15:8> \\ \hline
-    2 & analog mux $<20:16>$ 0=ground, 1=iboot ref, 2=vbgp, 3=output error amplifier, 4=ground,  5= ground \\ \hline
-	3 & current limit tune $<27:25>$, current limit tune enable $<24>$ \\ \hline
-	4 & output voltage fb $<32>$ \\ \hline
-	5 & Freq tune digital part $<42:40>$ can add up to 3 caps eq sized caps to saw tooth ==> clock 4 times slower, dig out$<47>$ ==> enable clock on digital pad\\ \hline
-    6 & Freq tune linear regulator$<50:48>$ can add up to 3 caps eq sized caps to saw tooth ==> clock 4 times slower \\ \hline
+    3 & analog mux $<20:16>$ 0=ground, 1=iboot ref, 2=vbgp, 3=output error amplifier, 4=ground,  5= ground \\ \hline
+	4 & current limit tune $<27:25>$, current limit tune enable $<24>$ \\ \hline
+	5 & output voltage fb $<32>$ \\ \hline
+	6 & Freq tune digital part $<42:40>$ can add up to 3 caps eq sized caps to saw tooth ==> clock 4 times slower, dig out$<47>$ ==> enable clock on digital pad\\ \hline
+    7 & Freq tune linear regulator$<50:48>$ can add up to 3 caps eq sized caps to saw tooth ==> clock 4 times slower \\ \hline
 	\caption{Register description} % needs to go inside longtable environment
 	\label{tab:reg_des}
 \end{longtable}
@@ -99,7 +99,7 @@ The current measured can be seen in \autoref{fig:current_source_distr}. About th
 \end{figure}
 \clearpage
 \subsection{Oscillator}
-The oscillator characteristics from the simulation can be seen in \autoref{tab:osc}. The measurements have thereby shown that the oscillator is not in the range of of the simulation, when there is no configuration made over the SPI one has a nominal frequency of \qty{2.63}{\mega\hertz}, whereas in the simulation one had \qty{1.7}{\mega\hertz}, which results in an deviation of $\left|\frac{\qty{2.63}{\mega\hertz}-\qty{1.7}{\mega\hertz}}{\qty{1.7}{\mega\hertz}}\right|\cdot 100\approx 54.7 \%$, which is even more than in the current reference. About the other parameters no measurements could be done since the oscillator is not directly accessible. Furthermore the frequency can also be tuned in the range of \qty{1.17}{\mega\hertz} to \qty{2.63}{\mega\hertz} over the spi registers (measured values) which results in the frequencies which can be seen in \autoref{tab:freq}. 
+The oscillator characteristics from the simulation can be seen in \autoref{tab:osc}. The measurements have thereby shown that the oscillator is not in the range of of the simulation, when there is no configuration made over the SPI one has a nominal frequency of \qty{2.63}{\mega\hertz}, whereas in the simulation one had \qty{1.7}{\mega\hertz}, which results in an deviation of $\left|\frac{\qty{2.63}{\mega\hertz}-\qty{1.7}{\mega\hertz}}{\qty{1.7}{\mega\hertz}}\right|\cdot 100\approx 54.7 \%$, which is even more than in the current reference circuit. About the other parameters no measurements could be done since the oscillator is not directly accessible. Furthermore the frequency can also be tuned in the range of \qty{1.17}{\mega\hertz} to \qty{2.63}{\mega\hertz} over the spi registers (measured values) which results in the frequencies which can be seen in \autoref{tab:freq}. 
 \begin{longtable}{|p{3.5cm}|p{3.5cm}|p{3.5cm}|p{3.5cm}|}
 	\hline
 	\rowcolor{lightgray}
@@ -116,7 +116,7 @@ The oscillator characteristics from the simulation can be seen in \autoref{tab:o
 	\begin{tabular}{|c|c|}
 		\hline
 		\rowcolor{lightgray}
-		Index & Frequency (MHz) \\
+		Register configuration & Frequency (MHz) \\
 		\hline
 		0 & \qty{2.63}{\mega\hertz} \\
 		\hline
@@ -135,7 +135,7 @@ The oscillator characteristics from the simulation can be seen in \autoref{tab:o
 		7 & \qty{1.17}{\mega\hertz} \\
 		\hline
 	\end{tabular}
-	\caption{Sorted Frequencies}
+	\caption{Measured Frequencies with different configurations at \qty{22}{\degreeCelsius} and 5V}
 	\label{tab:freq}
 \end{table}
 

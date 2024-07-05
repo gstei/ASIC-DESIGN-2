@@ -1,6 +1,8 @@
 \subsection{Known Limitations}
 
 \subsubsection{SPI Register Addressing Off-by-One Error}
+As illustrated in \autoref{tab:reg_des}, register two is absent. This absence was not intentional but a consequence of historical developments. Initially, registers one and two were designed as read registers to provide status information about the chip, such as over-temperature. However, it was later on decided not to implement these functionalities. Consequently, one register was eliminated, and a constant value was assigned to the remaining one (Register 1), as shown in \autoref{tab:reg_des}.
+This modification was made a few weeks prior to the tape-out, and as a result to a tight timeline it was overlooked that the test bench and address mapping of the design must be updated to reflect this change. Therefore, to write to the first write register, one must access register three instead of register two, as register two does not exist. While this is not a limitation per se, it is an important consideration when accessing the registers.
 
 \subsubsection{Current Measurement Inaccurate if $V_{DDL} \neq V_{IN}$}
 \label{subsubsec:cur_mes_inac}
