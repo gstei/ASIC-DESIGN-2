@@ -70,7 +70,7 @@ a4paper]{article}
     \thispagestyle{empty}
 
 \newgeometry{left=2cm,right=4cm,top=1cm,bottom=1cm,headsep=1.5cm, marginparwidth=30mm,marginparsep=3mm,includeheadfoot}
-\savegeometry{margin}
+\savegeometry{no-margin}
 	\thispagestyle{empty}
 	\include{sections/abstract/Abstract}
 	\include{sections/danksagung/Danksagung}
@@ -86,7 +86,7 @@ a4paper]{article}
 	\end{spacing}
 	\cleardoublepage
 	
-\loadgeometry{margin}
+\loadgeometry{no-margin}
 	\include{sections/assignment/assignment.tex}
 	\include{sections/einleitung/Einleitung}
 	%\include{sections/literaturstudie/Literaturstudie}
@@ -96,7 +96,7 @@ a4paper]{article}
 	\include{sections/02_testsetup/Software}	
 	
 	\include{sections/03_chip_testing/Results}	
-	\include{sections/03_chip_testing/Goal}	
+	%\include{sections/03_chip_testing/Goal}	
 	%\include{sections/DesignSchematic/DesignSchematic}
 	%\include{sections/DesignLayout/DesignLayout}
 %	\include{sections/implementation/RegulatorDesign.tex}%to be deleted
