@@ -187,12 +187,12 @@ The response to a load step is satisfactory and can be seen \autoref{fig:loadste
 \label{sec:loadRegulation}
 \begin{figure}[ht]
 	\centering
-	\resizebox{1\textwidth}{!}{\includegraphics{images/07_DCDC/LoadSteadyState0mA.png}}
+	\resizebox{0.8\textwidth}{!}{\includegraphics{images/07_DCDC/LoadSteadyState0mA.png}}
 	\caption{Steady state load regulation with a 0mA load. Dark Blue: $V_{OUT}$; Pink: $I_{OUT}$}
 \end{figure}
 \begin{figure}[ht]
 	\centering
-	\resizebox{1\textwidth}{!}{\includegraphics{images/07_DCDC/LoadSteadyState200mA.png}}
+	\resizebox{0.8\textwidth}{!}{\includegraphics{images/07_DCDC/LoadSteadyState200mA.png}}
 	\caption{Steady state load regulation with a 200mA load. Dark Blue: $V_{OUT}$; Pink: $I_{OUT}$}
 \end{figure}
 \clearpage
@@ -207,12 +207,19 @@ The response to a load step is satisfactory and can be seen \autoref{fig:loadste
     \end{figure}
     
 }
-\subsubsection{Power consumption and Efficiency}
-For the power consumption when 
-The efficiency of the TI chip was measured at different input voltages and loads. The efficiency was thereby callculated by difiding the output power by the input power. The results can be seen in \autoref{fig:efficiency TI chip}.
+\subsubsection{Efficiency}
+%The efficiency of the TI chip was measured at different input voltages and loads. The efficiency was thereby callculated by difiding the output power by the input power. The results can be seen in \autoref{fig:efficiency TI chip}.
+%\begin{figure}[h]
+%    \centering
+%    \includegraphics[width=0.8\textwidth]{../ASIC-DESIGN-2/images/03_plots/efficiencyTI.pdf}
+%    \caption{Efficiency TI CHIP}
+%    \label{fig:efficiency TI chip}
+%\end{figure}
+
+The conversion efficiency of our chip was measured under various load conditions and input voltage settings and can be seen in \autoref{fig:efficiency}. The measured values closely match our simulated values of \qty{83.5}{\percent} at \qty{200}{\milli\ampere} load current irrespective of the input voltage. The slight decrease in efficiency in comparison to the simulated values can be attributed to several not modeled influences such as bond wire resistance, losses in the input and output capacitors as well as losses else where outside of the chip. Of note is that the values \qty{20}{\milli\ampere} and \qty{50}{\milli\ampere} in \autoref{fig:efficiency} were extrapolated from the measured values at \qty{1}{\milli\ampere} and \qty{100}{\milli\ampere}.
 \begin{figure}[h]
     \centering
-    \includegraphics[width=0.8\textwidth]{../ASIC-DESIGN-2/images/03_plots/efficiencyTI.pdf}
-    \caption{Efficiency TI CHIP}
-    \label{fig:efficiency TI chip}
+    \input{../ASIC-DESIGN-2/images/07_DCDC/Efficiency.tex}
+    \caption{Measured efficiency of our chip; Data points for 20 mA and 50 mA extrapolated from dataset}
+    \label{fig:efficiency}
 \end{figure}
