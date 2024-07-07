@@ -1,4 +1,7 @@
+\section{Test Setup}
+\label{sec:testsetup}
 \subsection{Hardware}
+\label{sec:hardware}
 In this section we introduce the hardware setup we created in order to validate our chip design and compare the samples we received with the results we obtained from simulations. For an as like to like comparison as possible with the simulations we created hardware that replicates the virtual test bench setup as close as possible. The setup for instance contains electronically controllable loads like in the simulations to compare dynamic regulation characteristics of the buck-boost converter. These responses to load steps also give insight into the closed loop regulation characteristics like bandwidth and phase margin of the internal regulation loop. An additional goal is to verify our SPI slave implementation with a commercial SPI master device like an Arduino or USB to SPI converter. The accuracy of internal signals such as the internal oscillator and the the bandgap voltage reference are of additional interest. \\
 List of intended measurements:
 \begin{itemize}
