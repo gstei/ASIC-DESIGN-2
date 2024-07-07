@@ -34,6 +34,7 @@ Consequently, when the chip gets powered and reaches a voltage over the minimum 
 	\label{tab:por}
 \end{longtable}
 \subsection{Bandgap}
+\label{subsubsec:bandgap}
 The bandgap characteristics from the simulation can be seen in \autoref{tab:bandgap}, \autoref{fig:bandgap_voltage_vs_temp} and \autoref{fig:bandgap_voltage_mc}. The measurements have thereby shown that the bandgap voltage is in the range of of the simulation, the mean value is just shifted by 10mV. As it can be seen in the comparison of \autoref{fig:bandgap_voltage_distrb} and \autoref{fig:bandgap_voltage_mc}. Furthermore due to the fact that the reference current is slightly to high the center of the bandgap vs temperature curve is not anymore at \qty{40}{\degreeCelsius} but at about \qty{55}{\degreeCelsius} as it can be seen in the comparison of \autoref{fig:bandgap_voltage_vs_temp} and \autoref{fig:bandgap_voltage_vs_temp_mes}. About the other parameters like the current consumption and the min voltage no measurements could be done since the band gap is not directly accessible.
 \begin{longtable}{|p{3.5cm}|p{3.5cm}|p{3.5cm}|p{3.5cm}|}
 	\hline
@@ -73,6 +74,7 @@ The bandgap characteristics from the simulation can be seen in \autoref{tab:band
 \end{figure}
 \clearpage
 \subsection{Current Source}
+\label{subsubsec:current_source}
 The current source characteristics from the simulation can be seen in \autoref{tab:current_source} and \autoref{fig:ref_cur_mont}. The measurements have thereby shown that the current source is not in the range of of the simulation. The current measured is about \qty{4}{\micro\ampere} higher than the one simulated which corresponds to a derivation of $\left|\frac{\qty{14.3}{\micro\ampere}-\qty{10.3}{\micro\ampere}}{\qty{10.3}{\micro\ampere}}\right|\cdot 100\approx 38.8 \%$. An exact explanation for this behavior was not found, but since the oscillator has the same deviation and is independently of the current source the deviation most probably comes from the \glqq rmp1\grqq resistors since those were used in the layout of the oscillator and the current reference.
 The current measured can be seen in \autoref{fig:current_source_distr}. About the other parameters no measurements could be done since the current source is not directly accessible.
 \begin{longtable}{|p{3.5cm}|p{3.5cm}|p{3.5cm}|p{3.5cm}|}
@@ -100,6 +102,7 @@ The current measured can be seen in \autoref{fig:current_source_distr}. About th
 \end{figure}
 \clearpage
 \subsection{Oscillator}
+\label{subsubsec:oscillator}
 The oscillator characteristics from the simulation can be seen in \autoref{tab:osc}. The measurements have thereby shown that the oscillator is not in the range of of the simulation, when there is no configuration made over the SPI one has a nominal frequency of \qty{2.63}{\mega\hertz}, whereas in the simulation one had \qty{1.7}{\mega\hertz}, which results in an deviation of $\left|\frac{\qty{2.63}{\mega\hertz}-\qty{1.7}{\mega\hertz}}{\qty{1.7}{\mega\hertz}}\right|\cdot 100\approx 54.7 \%$, which is even more than in the current reference circuit. About the other parameters no measurements could be done since the oscillator is not directly accessible. Furthermore the frequency can also be tuned in the range of \qty{1.17}{\mega\hertz} to \qty{2.63}{\mega\hertz} over the spi registers (measured values) which results in the frequencies which can be seen in \autoref{tab:freq}. 
 \begin{longtable}{|p{3.5cm}|p{3.5cm}|p{3.5cm}|p{3.5cm}|}
 	\hline

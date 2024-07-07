@@ -29,5 +29,13 @@ A misconfiguration of the default state in the internal registers causes the cur
 
 
 \subsection{Internal Current Reference out of Specification}
+The internal current reference of the ASIC was found to be out of specification during testing. The measured current was approximately \qty{4}{\micro\ampere} higher than the simulated value, corresponding to a deviation of about 38.8\%. An exact explanation for this behavior was not found, but it is suspected that the deviation may be due to the resistors used in the layout of the current reference.
+
+The current reference is a crucial component of the \ac{ASIC}, as it provides a stable reference current for various parts of the circuit. Any deviation in the current reference can therefore have a significant impact on the overall performance of the \ac{ASIC}. Nevertheless besides some higher current consumption the other blocks seemed to work as expected also with the higher current just. In some block the phenomena of the higher current is nevertheless visible like in the bandgap circuit where the voltage has its peak in the simulation at \qty{40}{\degreeCelsius} but with the higher current at about \qty{55}{\degreeCelsius} as also mentioned in \autoref{subsubsec:bandgap}.
+
+For more details on the current reference, please refer to the section on the current source in \autoref{subsubsec:current_source} and the corresponding figures.
 
 \subsection{Internal Oscillator out of Specification}
+The internal oscillator of the \ac{ASIC} was also found to be out of specification during testing. The measured frequency was significantly higher than the simulated value, resulting in a deviation of approximately 54.7\% as it can be seen in \autoref{subsubsec:oscillator}. Since this circuit was independent of the current source but also relied on the resistor used in the current reference we assume that once more something was wrong with the resistors.
+
+Since the oscillator is also a key component of the \ac{ASIC}, as it provides the clock signal that drives the controller and the digital part. Any deviation in the oscillator frequency has a direct influence on the power consumption.
