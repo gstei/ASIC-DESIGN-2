@@ -228,6 +228,31 @@ The conversion efficiency of our chip was measured under various load conditions
     \caption{Conversion efficiency of our chip; Data points for 20 mA and 50 mA are estimates based on interpolation}
     \label{fig:efficiency}
 \end{figure}
+\clearpage
+\subsubsection{Conversion Losses}
+\label{sec:losses}
+The total conversion losses can be put into two broad categories of switching frequency dependent switching losses and load dependent conduction losses shown in \autoref{eq:PLoss}. Our measured conversion losses can be seen in \autoref{fig:losses} and shows a roughly \qty{100}{\milli\watt} load independent loss, which explains the poor efficiency at sub \qty{100}{\milli\ampere} output currents seen in \autoref{fig:efficiency}. As output currents increase, the proportion of power lost due to switching decreases, leading to the improved efficiency at 100 to \qty{200}{\milli\ampere} range. With large output currents >\qty{200}{\milli\ampere} the conduction losses take over as they are proportional to the square of the output current leading again to a decrease in efficiency.
+
+\begin{equation}
+    P_{TOT} \approx P_{SWITCH} + P_{COND}
+\end{equation}
+\label{eq:PLoss}
+with
+\begin{equation*}
+   P_{SWITCH} \propto 1
+\end{equation*}
+and 
+\begin{equation*}
+	P_{COND} \propto I_{OUT}^2
+\end{equation*}
+
+\begin{figure}[h]
+    \centering
+    \input{../ASIC-DESIGN-2/images/07_DCDC/Losses.tex}
+    \caption{Conversion losses at 1.17 MHz switching frequency}
+    \label{fig:losses}
+\end{figure}
 
 \subsection{Device Characteristics}
 \label{sec:characteristics}
+
