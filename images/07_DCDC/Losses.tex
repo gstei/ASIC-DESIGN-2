@@ -1,0 +1,50 @@
+\begin{tikzpicture}
+\begin{axis}[
+    title={Conversion Loss versus Output Current},
+    xlabel={Output Current [\qty{}{\milli\ampere}]},
+    ylabel={Power Loss [\qty{}{\milli\watt}]},
+    xmin=0, xmax=300,
+    ymin=0, ymax=600,
+    xtick={0,100, 200, 300},
+    ytick={0,100,200,300,400,500, 600},
+    legend pos=north west,
+    ymajorgrids=true,
+    grid style=dashed,
+]
+
+\addplot[
+    color=blue,
+    mark=square,
+    ]
+    coordinates {
+    (1,90.7)(100,124)(200,280)(300,485)
+    };
+    \addlegendentry{$V_{IN} = \qty{5}{\volt}$}
+     
+\addplot[
+    color=orange,
+    mark=triangle,
+    ]
+    coordinates {
+    (1,68.8)(100,139.1)(200,290.5)(300,585.5)
+    };
+    \addlegendentry{$V_{IN} = \qty{4.3}{\volt}$}
+\addplot[
+    color=mygreen,
+    mark=o,
+    ]
+    coordinates {
+    (1,105.9)(100,139)(200,249.5)(300,434)
+    };
+    \addlegendentry{$V_{IN} = \qty{5.5}{\volt}$}
+%\addplot[
+%    color=purple,
+%    mark=x,
+%    ]
+%    coordinates {
+%    (1,100)(100,144)(200,276)(300,496)
+%    };
+%    \addlegendentry{$\qty{0.1}{\watt}+(\frac{1}{\qty{50}{\percent}}*I_{OUT})^2*\qty{1.1}{\ohm}$}
+    
+\end{axis}
+\end{tikzpicture}
