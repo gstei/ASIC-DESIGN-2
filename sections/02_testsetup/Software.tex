@@ -3,7 +3,11 @@
 \subsection{Software}
 
 \subsubsection{Architecture}
-For the architecture of the test software, it was decided to adopt a modular approach with separate classes for each test and measurement instrument. This architecture facilitates easy extension of the software with new instruments and tests. Additionally, it allows looping over different tests without the need to initialize and close measurement instruments every time they are used. For data storage, the decision was made to employ a database, as it offers a convenient way to store and analyze data afterward. Thereby SQLite was chosen as the database solution due to its lightweight nature and ease of use, requiring no server to be running. The database was structured with the following columns:
+The architecture of the test software was designed with a modular approach in mind, incorporating separate classes for each test and measurement instrument. This design choice not only simplifies the extension of the software with new instruments and tests but also enables looping over different tests without the constant need to initialize and close measurement instruments.
+
+For data storage, we opted for a database solution, providing a convenient method for storing and subsequent data analysis. SQLite was selected as the database of choice due to its lightweight nature and user-friendly interface, eliminating the need for a running server.
+
+The database was structured with the following columns:
 \begin{itemize}
     \item \textbf{Id}: The unique identifier for each measurement.
     \item \textbf{chip\_id}: The identifier for the chip that was measured.
@@ -17,7 +21,7 @@ For the architecture of the test software, it was decided to adopt a modular app
 \end{itemize}
 
 \subsubsection{Test Software Language}
-The test software was implemented using Python. Python is a high-level programming language widely utilized in the scientific community and increasingly in testing due to its ease of learning and the availability of drivers for nearly every measurement instrument\cite{Wikipedia:Python}. Additionally, one of the authors had prior experience in writing test scripts in Python for chip verification and validation, enabling the initiation of test writing without a significant investment in learning a new programming language and environment.
+The test software was implemented using Python. Python is a high-level programming language widely utilized in the scientific community and increasingly in testing due to its ease of learning and the availability of drivers for nearly every measurement instrument \cite{Wikipedia:Python}. Additionally, one of the authors had prior experience in writing test scripts in Python for chip verification and validation, enabling the initiation of test writing without a significant investment in learning a new programming language and environment.
 
 \subsubsection{Test Software Implementation}
 Prior to commencing the test software development, the various tests to be performed were determined, aiming to align with those conducted in simulations. These included:
@@ -67,8 +71,14 @@ Flake8 is a Python linting tool that scans Python codebases for errors, style in
 
 \subsubsection{SPI Interface}
 \label{subsubsec:SPI}
-The registers of the chip can be controlled over a SPI interface, therefore a SPI Master was needed.
-It was decided to implemented the SPI master using the FTDI C232HM-DDHSL-0 USB to SPI converter. The FTDI chip was chosen due to its ease of use and the availability of drivers for Python. But it finally turned out that the SPI mode 1 which was implemented on the chip does not exactly correspond to SPI mode 1 implemented on the FTDI Chip. On the FTDI Chip the CS and the first SPI clock edge are turned on on the same time, but on the test bench used in the simulation to verify the digital part of the chip this was not the case and due to its implementation the finite state machine only works when the CS is turned on before the first clock edge as it is also visible in \autoref{fig:spi_modes} (CPOL=0, CPHA=1). Therefore a custom driver was implemented in software which only works at 1kHz instead of 500kHz, but since one only needs to write eight different register this does not really matter. Since the human counterpart does not see the difference. Nevertheless for further projects we would recommend to have a look at the test instruments already when designing the chip to avoid such problems. Nevertheless the SPI interface should work with a normal micro controller which uses the SPI standard as as it can be seen in \autoref{fig:spi_modes} where the CS is turned on before the first clock edge. Nevertheless there are some special implementations of the SPI as in the FTDI C232HM-DDHSL-0 which should have been covered as well during the design.
+The chip's registers are controlled via an SPI interface, necessitating an SPI Master. We chose to implement the SPI master using the FTDI C232HM-DDHSL-0 USB to SPI converter, primarily due to its user-friendly nature and the availability of Python drivers. 
+
+However, we encountered a discrepancy between the SPI mode 1 implemented on the chip and the SPI mode 1 on the FTDI Chip. On the FTDI Chip, the CS and the first SPI clock edge are activated simultaneously, which was not the case on the test bench used in the simulation to verify the digital part of the chip. Due to its implementation, the finite state machine only operates correctly when the CS is activated before the first clock edge, as illustrated in \autoref{fig:spi_modes} (CPOL=0, CPHA=1). 
+
+To address this, we implemented a custom driver in software, which operates at 1kHz instead of 500kHz. Given that we only need to write/read seven different registers, this slower speed does not significantly impact the overall performance, and the difference is imperceptible to the human operator. 
+
+However, for future projects, we recommend considering the test instruments during the chip design phase to avoid such issues. The SPI interface should function correctly with a standard microcontroller that uses the SPI standard, as shown in \autoref{fig:spi_modes}, where the CS is activated before the first clock edge. However, it's important to note that there are some unique implementations of the SPI, as in the FTDI C232HM-DDHSL-0, which should also be considered during the design phase.
+
 \begin{figure}[h]
     \centering
     \includegraphics[width=0.8\textwidth]{../ASIC-DESIGN-2/images/04_spi/SPI_timing_diagram_CS.svg.png}

@@ -2,6 +2,7 @@
 \label{sec:limitations}
 
 \subsection{SPI Register Addressing Off-by-One Error}
+\label{subsec:spi_register_offset}
 As illustrated in \autoref{tab:reg_des}, register two is absent. This absence was not intentional but a consequence of historical developments. Initially, registers one and two were designed as read-only registers to provide status information about the chip, such as over-temperature. However, it was later on decided not to implement these functionalities. Consequently, one register was eliminated, and a constant value was assigned to the remaining one (Register 1), as shown in \autoref{tab:reg_des}.
 This modification was made a few weeks prior to the tape-out, and as a result to a tight timeline it was overlooked that the test bench and address mapping of the design must be updated to reflect this change. Therefore, to write to the first write register, one must access register three instead of register two, as register two does not exist. While this is not a limitation per se, it is an important consideration when accessing the registers.
 
@@ -37,13 +38,11 @@ A misconfiguration of the default state in the internal registers causes the cur
 
 
 \subsection{Internal Current Reference out of Specification}
-The internal current reference of the ASIC was found to be out of specification during testing. The measured current was approximately \qty{4}{\micro\ampere} higher than the simulated value, corresponding to a deviation of about 38.8\%. An exact explanation for this behavior was not found, but it is suspected that the deviation may be due to the resistors used in the layout of the current reference.
+During testing, the internal current reference of the ASIC was discovered to be out of specification. The measured current was approximately \qty{4}{\micro\ampere} higher than the simulated value, representing a deviation of about 38.8\%. While an exact cause for this discrepancy was not identified, it is hypothesized that the deviation may be attributable to the resistors used in the layout of the current reference.
 
-The current reference is a crucial component of the \ac{ASIC}, as it provides a stable reference current for various parts of the circuit. Any deviation in the current reference can therefore have a significant impact on the overall performance of the \ac{ASIC}. Nevertheless besides some higher current consumption the other blocks seemed to work as expected also with the higher current just. In some block the phenomena of the higher current is nevertheless visible like in the bandgap circuit where the voltage has its peak in the simulation at \qty{40}{\degreeCelsius} but with the higher current at about \qty{55}{\degreeCelsius} as also mentioned in \autoref{subsubsec:bandgap}.
+The current reference plays a pivotal role in the \ac{ASIC}, providing a stable reference current for various circuit components. Consequently, any deviation in the current reference can significantly affect the overall performance of the \ac{ASIC}. Despite this, apart from some increased current consumption, the other blocks appeared to function as expected, even with the elevated current. However, the impact of the higher current is noticeable in certain blocks, such as the bandgap circuit. In the simulation, the voltage peaks over temperature is at \qty{40}{\degreeCelsius}, but in the measurement with the higher current, it peaks at approximately \qty{55}{\degreeCelsius}, as also discussed in \autoref{subsubsec:bandgap}.
 
-For more details on the current reference, please refer to the section on the current source in \autoref{subsubsec:current_source} and the corresponding figures.
+For more details on the current reference, please refer to \autoref{subsubsec:current_source} and the corresponding figures.
 
 \subsection{Internal Oscillator out of Specification}
 The internal oscillator of the \ac{ASIC} was also found to be out of specification during testing. The measured frequency was significantly higher than the simulated value, resulting in a deviation of approximately 54.7\% as it can be seen in \autoref{subsubsec:oscillator}. Since this circuit was independent of the current source but also relied on the resistor used in the current reference we assume that once more something was wrong with the resistors.
-
-Since the oscillator is also a key component of the \ac{ASIC}, as it provides the clock signal that drives the controller and the digital part. Any deviation in the oscillator frequency has a direct influence on the power consumption.

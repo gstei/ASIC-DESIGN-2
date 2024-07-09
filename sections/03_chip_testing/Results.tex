@@ -1,7 +1,8 @@
 \section{Results}
 \label{sec:results}
-On the SPI interface one should be able to successfully write and read back registers. Therefore a complete SPI driver was written in python which allows to simply mux out the wanted analog/digital signal, change the clock frequency and read back the register values. An overview of the registers can be found bellow whereby register 7 is not connected to anything and therefore not listed in \autoref{tab:reg_des}.
+On the SPI interface one should be able to successfully write and read back registers. Therefore a complete SPI driver was written in python which allows to simply mux out the wanted analog/digital signal, change the clock frequency and read back the register values. An overview of the registers can be found bellow \autoref{tab:reg_des} whereby register two does not exist as mentioned later on in \autoref{subsec:spi_register_offset}.
 \subsection{SPI Interface}
+\label{subsec:spi_interface}
 \begin{longtable}{|p{3.5cm}|p{10.5cm}|}
 	\hline
 	\rowcolor{lightgray}
@@ -75,7 +76,7 @@ The bandgap characteristics from the simulation can be seen in \autoref{tab:band
 \clearpage
 \subsection{Current Source}
 \label{subsubsec:current_source}
-The current source characteristics from the simulation can be seen in \autoref{tab:current_source} and \autoref{fig:ref_cur_mont}. The measurements have thereby shown that the current source is not in the range of of the simulation. The current measured is about \qty{4}{\micro\ampere} higher than the one simulated which corresponds to a derivation of $\left|\frac{\qty{14.3}{\micro\ampere}-\qty{10.3}{\micro\ampere}}{\qty{10.3}{\micro\ampere}}\right|\cdot 100\approx 38.8 \%$. An exact explanation for this behavior was not found, but since the oscillator has the same deviation and is independently of the current source the deviation most probably comes from the \glqq rmp1\grqq resistors since those were used in the layout of the oscillator and the current reference.
+The current source characteristics from the simulation can be seen in \autoref{tab:current_source} and \autoref{fig:ref_cur_mont}. The measurements have thereby shown that the current source is not in the range of of the simulation. The current measured is about \qty{4}{\micro\ampere} higher than the one simulated which corresponds to a derivation of $\left|\frac{\qty{14.3}{\micro\ampere}-\qty{10.3}{\micro\ampere}}{\qty{10.3}{\micro\ampere}}\right|\cdot 100\approx 38.8 \%$. An exact explanation for this behavior was not found, but since the oscillator has a similar deviation and is independently of the current source the deviation most probably comes from the \glqq rmp1\grqq{} resistors since those were used in the layout of the oscillator and the current reference.
 The current measured can be seen in \autoref{fig:current_source_distr}. About the other parameters no measurements could be done since the current source is not directly accessible.
 \begin{longtable}{|p{3.5cm}|p{3.5cm}|p{3.5cm}|p{3.5cm}|}
 	\hline
@@ -139,7 +140,7 @@ The oscillator characteristics from the simulation can be seen in \autoref{tab:o
 		7 & \qty{1.17}{\mega\hertz} \\
 		\hline
 	\end{tabular}
-	\caption{Measured Frequencies with different configurations at \qty{22}{\degreeCelsius} and 5V}
+	\caption{Measured Frequencies with different register configurations at \qty{22}{\degreeCelsius} and 5V}
 	\label{tab:freq}
 \end{table}
 
@@ -203,14 +204,14 @@ The response to a load step is satisfactory and can be seen \autoref{fig:loadste
 
 
 
-\foreach \i in {../ASIC-DESIGN-2/images/03_plots/DCDC Reset Test with 4.3V and resistor R2\, 70°C} {
-    \begin{figure}[h]
-        \centering
-    \includegraphics[width=0.95\textwidth]{\i.pdf}
-    %     \caption{\i}
-    \end{figure}
-    
-}
+%\foreach \i in {../ASIC-DESIGN-2/images/03_plots/DCDC Reset Test with 4.3V and resistor R2\, 70°C} {
+%    \begin{figure}[h]
+%        \centering
+%    \includegraphics[width=0.95\textwidth]{\i.pdf}
+%    %     \caption{\i}
+%    \end{figure}
+%    
+%}
 \subsubsection{Efficiency}
 \label{sec:efficiency}
 %The efficiency of the TI chip was measured at different input voltages and loads. The efficiency was thereby callculated by difiding the output power by the input power. The results can be seen in \autoref{fig:efficiency TI chip}.
@@ -225,7 +226,7 @@ The conversion efficiency of our chip was measured under various load conditions
 \begin{figure}[h]
     \centering
     \input{../ASIC-DESIGN-2/images/07_DCDC/Efficiency.tex}
-    \caption{Conversion efficiency of our chip; Data points for 20 mA and 50 mA are estimates based on interpolation}
+    \caption{Conversion efficiency of our chip; Data points for 20 mA and 50 mA are estimates based on interpolation (Oscillator Frequency \qty{1.17}{\mega\hertz})}
     \label{fig:efficiency}
 \end{figure}
 \clearpage
