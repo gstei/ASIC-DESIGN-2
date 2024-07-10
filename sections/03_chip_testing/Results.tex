@@ -190,16 +190,19 @@ The response to a load step is satisfactory and can be seen \autoref{fig:loadste
 \clearpage
 
 \subsubsection{Load Regulation}
+The output voltage with a \qty{0}{\milli\ampere} and \qty{200}{\milli\ampere} load can be seen in \autoref{fig:static0mA} and \autoref{fig:static200mA} respectively. The large ripple as well as the low frequency oscillating behavior are unintentional and are not present in the simulations conducted. The increased switching noise highlights the lack of switching during some periods of operation. Under correct operation the switching should never cease and only the duty-cycle should change depending the load conditions and input to output voltage ratio. As can be seen by comparing both images, the period of the discontinuous switching cycles changes based on the load current implying a connection to the regulators duty-cycle. It is suspected that an issue in current measurement circuit later described in \autoref{subsubsec:cur_mes_inac} could reasonable have influenced this behavior, although a clear causal link could not be established.
 \label{sec:loadRegulation}
 \begin{figure}[ht]
 	\centering
-	\resizebox{0.8\textwidth}{!}{\includegraphics{images/07_DCDC/LoadSteadyState0mA.png}}
+	\resizebox{0.75\textwidth}{!}{\includegraphics{images/07_DCDC/LoadSteadyState0mA.png}}
 	\caption{Steady state load regulation with a 0mA load. Dark Blue: $V_{OUT}$; Pink: $I_{OUT}$}
+	\label{fig:static0mA}
 \end{figure}
 \begin{figure}[ht]
 	\centering
-	\resizebox{0.8\textwidth}{!}{\includegraphics{images/07_DCDC/LoadSteadyState200mA.png}}
+	\resizebox{0.75\textwidth}{!}{\includegraphics{images/07_DCDC/LoadSteadyState200mA.png}}
 	\caption{Steady state load regulation with a 200mA load. Dark Blue: $V_{OUT}$; Pink: $I_{OUT}$}
+	\label{fig:static200mA}
 \end{figure}
 \clearpage
 
@@ -223,7 +226,7 @@ The response to a load step is satisfactory and can be seen \autoref{fig:loadste
 %    \label{fig:efficiency TI chip}
 %\end{figure}
 
-The conversion efficiency of our chip was measured under various load conditions and input voltage settings and can be seen in \autoref{fig:efficiency}. The measured values closely match our simulated values of \qty{83.5}{\percent} at \qty{200}{\milli\ampere} load current irrespective of the input voltage. The slight decrease in efficiency in comparison to the simulated values can be attributed to several not modeled influences such as bond wire resistance, losses in the input and output capacitors as well as losses else where outside of the chip. Of note is that the efficiency figures for \qty{20}{\milli\ampere} and \qty{50}{\milli\ampere} loads in \autoref{fig:efficiency} were estimated by linearly interpolating the measured input power levels at \qty{1}{\milli\ampere} and \qty{100}{\milli\ampere} and then dividing the known output power level by the calculated input power estimate.
+The conversion efficiency of our chip was measured under various load conditions and input voltage settings and can be seen in \autoref{fig:efficiency}. The measured results closely match our simulated values of \qty{83.5}{\percent} at \qty{200}{\milli\ampere} load current regardless of the input voltage applied. The slight decrease in efficiency in comparison to the simulated values can be attributed to several not modeled effects such as bond wire resistance, losses in the input and output capacitors as well as losses else where outside of the \ac{IC}. Of note is that the efficiency figures for \qty{20}{\milli\ampere} and \qty{50}{\milli\ampere} loads in \autoref{fig:efficiency} were estimated by linearly interpolating the measured input power levels at \qty{1}{\milli\ampere} and \qty{100}{\milli\ampere} and then dividing the known output power level by the calculated input power estimate.
 \begin{figure}[h]
     \centering
     \input{../ASIC-DESIGN-2/images/07_DCDC/Efficiency.tex}
@@ -233,16 +236,13 @@ The conversion efficiency of our chip was measured under various load conditions
 \clearpage
 \subsubsection{Conversion Losses}
 \label{sec:losses}
-The total conversion losses can be put into two broad categories of switching frequency dependent switching losses and load dependent conduction losses shown in \autoref{eq:PLoss}. Our measured conversion losses can be seen in \autoref{fig:losses} and shows a roughly \qty{100}{\milli\watt} load independent loss, which explains the poor efficiency at sub \qty{100}{\milli\ampere} output currents seen in \autoref{fig:efficiency}. As output currents increase, the proportion of power lost due to switching decreases, leading to the improved efficiency in the 100 to \qty{200}{\milli\ampere} output current range. With large output currents >\qty{200}{\milli\ampere} the conduction losses take over as they are proportional to the square of the output current leading again to a decrease in efficiency.
+The total conversion losses can classified into two broad categories of switching frequency dependent switching losses and load dependent conduction losses as shown in \autoref{eq:PLoss}. Our measured conversion losses can be seen in \autoref{fig:losses} and shows a roughly \qty{100}{\milli\watt} load independent loss, which explains the poor efficiency at sub \qty{100}{\milli\ampere} output currents. As the output currents increase, the proportion of power loss due to switching decreases, leading to the improved efficiency in the 100 to \qty{200}{\milli\ampere} output current range. With large output currents >\qty{200}{\milli\ampere} the conduction losses take over leading again to a decrease in efficiency.
 
 \begin{equation}
     P_{TOT} \approx P_{SWITCH} + P_{COND}
 \end{equation}
 \label{eq:PLoss}
-with
-\begin{equation*}
-   P_{SWITCH}\;\propto\;1\; \textrm{and} \;P_{COND}\;\propto\;I_{OUT}^2
-\end{equation*}
+For an iso-frequency measurement as conducted in \autoref{fig:losses} the switching losses appear as a constant offset as $P_{SWITCH}\;\propto\;1$ and the conduction losses increase with the load current as $P_{COND}\;\propto\;I_{OUT}^2$. These contributions can be clearly seen \autoref{fig:losses} as a constant loss together with a quadratically increasing loss based on the load applied.
 
 \begin{figure}[h]
     \centering
@@ -254,7 +254,7 @@ with
 
 \subsection{Device Characteristics}
 \label{sec:characteristics}
-The most critical device characteristics were compiled in to datasheet like table in \autoref{tab:datasheet} in order to give a high-level insight into the device operation as well as to compare the measured values with the results obtained from simulations.
+The most critical device characteristics were compiled in to datasheet like table in \autoref{tab:datasheet} in order to give a high-level insight into the device operation and to compare the measured values with the results obtained from simulations.
 
 \input{../ASIC-DESIGN-2/images/07_DCDC/Datasheet.tex}
 
