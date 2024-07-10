@@ -5,7 +5,7 @@
 \subsubsection{Architecture}
 The architecture of the test software was designed with a modular approach in mind, incorporating separate classes for each test and measurement instrument. This design choice not only simplifies the extension of the software with new instruments and tests but also enables looping over different tests without the constant need to initialize and close measurement instruments.
 
-For data storage, we opted for a database solution, providing a convenient method for storing and subsequent data analysis. SQLite was selected as the database of choice due to its lightweight nature and user-friendly interface, eliminating the need for a running server.
+For the data storage a database solution was selected providing for a convenient method for storing information and easily allowing for subsequent data analysis. SQLite was selected as the database of choice due to its lightweight nature and user-friendly interface, eliminating the need for a running server.
 
 The database was structured with the following columns:
 \begin{itemize}
@@ -28,7 +28,7 @@ Prior to commencing the test software development, the various tests to be perfo
 \begin{itemize}
     \item Startup behavior with reset disabled
     \item Startup behavior with active reset and subsequently disabled reset
-    \item Load step response with load variations of 10mA, 100mA, and 200mA
+    \item Load step response with load variations of \qty{1}{\milli\ampere}, \qty{100}{\milli\ampere}, and \qty{200}{\milli\ampere}
     \item Output response to stepped input voltage changes
     \item Turn-off and turn-on behavior with brief reset enablement
     \item SPI test to mux out the wanted analog/digital signal, change the clock frequency, and read back the register values
@@ -58,7 +58,7 @@ An overview of all the instruments can be seen in Figure \autoref{fig:overview}.
 \end{figure}
 
 \subsubsection{Github}
-The test software was written using Git as its version control system, with the repository being hosted on GitHub. This choice was driven by GitHub's widespread adoption and its seamless integration for collaborative code sharing among team members. Furthermore, Git's robust features allow for efficient tracking of changes and management of various software versions. The repository can be found at \href{https://github.com/gstei/asic_validation.git}{the following link}\footnote{https://github.com/gstei/asic\_validation.git}. Furthermore the repository uses github actions to automatically run tests on every push to the repository. This ensures that the code is written in a nice way according to the PEP8 standard and that the tests are most probably running without any errors, for that \href{par:Flake8}{flake8} and \href{par:Pylint}{pylint} were used as linter and integrated in the github workflow.
+The test software was written using Git as its version control system, with the repository being hosted on GitHub. This choice was driven by GitHub's widespread adoption and its seamless integration for collaborative code sharing among team members. Furthermore, Git's robust features allow for efficient tracking of changes and management of various software versions. The repository can be found at \href{https://github.com/gstei/asic_validation.git}{the following link}\footnote{https://github.com/gstei/asic\_validation.git}. Additionally the repository uses github actions to automatically run tests on every push to the repository. This ensures that the code is written in a appealing way according to the PEP8 standard and that the tests are most probably running without any errors, for that \href{par:Flake8}{flake8} and \href{par:Pylint}{pylint} were used as linter and integrated in the github workflow.
 
 \paragraph{Pylint}
 \label{par:Pylint}
@@ -71,9 +71,9 @@ Flake8 is a Python linting tool that scans Python codebases for errors, style in
 
 \subsubsection{SPI Interface}
 \label{subsubsec:SPI}
-The chip's registers are controlled via an SPI interface, necessitating an SPI Master. We chose to implement the SPI master using the FTDI C232HM-DDHSL-0 USB to SPI converter, primarily due to its user-friendly nature and the availability of Python drivers. 
+The chip's registers are controlled via an SPI interface, necessitating an SPI Master. For the SPI master the FTDI C232HM-DDHSL-0 USB to SPI converter was chosen, primarily due to its user-friendly nature and the availability of Python drivers. 
 
-However, we encountered a discrepancy between the SPI mode 1 implemented on the chip and the SPI mode 1 on the FTDI Chip. On the FTDI Chip, the CS and the first SPI clock edge are activated simultaneously, which was not the case on the test bench used in the simulation to verify the digital part of the chip. Due to its implementation, the finite state machine only operates correctly when the CS is activated before the first clock edge, as illustrated in \autoref{fig:spi_modes} (CPOL=0, CPHA=1). 
+A discrepancy between the SPI mode 1 implemented on the chip and the SPI mode 1 on the FTDI Chip was however found. On the FTDI Chip, the CS and the first SPI clock edge are activated simultaneously, which was not the case on the test bench used in the simulation to verify the digital part of the chip. Due to its implementation, the finite state machine only operates correctly when the CS is activated before the first clock edge, as illustrated in \autoref{fig:spi_modes} (CPOL=0, CPHA=1). 
 
 To address this, we implemented a custom driver in software, which operates at 1kHz instead of 500kHz. Given that we only need to write/read seven different registers, this slower speed does not significantly impact the overall performance, and the difference is imperceptible to the human operator. 
 
@@ -86,7 +86,7 @@ However, for future projects, we recommend considering the test instruments duri
     \label{fig:spi_modes}
 \end{figure}
 \subsubsection{Conclusion}
-In retrospective one can say that it was a very good decision to spend quite some time in the software architecture in the beginning of the project and to use a database. Since it turned out that once it is clear what and how something has to be implemented the software can be written quite fast and with the code checker in the background also with a reasonable quality, this for example allowed to add the thermostreamer to the tests within two hours without any issues and all measurement results were available in the database. Nevertheless it also turned out that when the chip does not behave as expected the test script is not useful at all. Due to that the automated tests only worked with the TI chip, but not with our chip since we had startup problems on our chip which caused that the whole automated test could not be executed since the chip started not correctly as also mentioned in 
+In retrospective it was a very good decision to spend quite some time in the software architecture in the beginning of the project and to use a database. Since it turned out that once it is clear what and how something has to be implemented the software can be written quite fast and with the code checker in the background also with a reasonable quality, this for example allowed to add the thermostreamer to the tests within two hours without any issues and all measurement results were available in the database. Nevertheless it also turned out that when the chip does not behave as expected the test script is not useful at all. Due to that the automated tests only worked with the TI chip, but not with our chip since we had startup problems on our chip which caused that the whole automated test could not be executed since the chip started not correctly as also mentioned in 
 \autoref{subsubsec:cur_mes_inac}.
 
 

@@ -1,12 +1,12 @@
 \section{Results}
 \label{sec:results}
-On the SPI interface one should be able to successfully write and read back registers. Therefore a complete SPI driver was written in python which allows to simply mux out the wanted analog/digital signal, change the clock frequency and read back the register values. An overview of the registers can be found bellow \autoref{tab:reg_des} whereby register two does not exist as mentioned later on in \autoref{subsec:spi_register_offset}.
+On the SPI interface one should be able to successfully write and read back registers. Therefore a complete SPI driver was written in python which allows to simply mux out the wanted analog/digital signal, change the clock frequency and read back the register values. An overview of the registers can be found bellow \autoref{tab:reg_des} whereby register 2 does not exist as later elaborated on in \autoref{subsec:spi_register_offset}.
 \subsection{SPI Interface}
 \label{subsec:spi_interface}
-\begin{longtable}{|p{3.5cm}|p{10.5cm}|}
+\begin{longtable}{|p{1.5cm}|p{10.5cm}|}
 	\hline
 	\rowcolor{lightgray}
-	\textbf{Register Number} &\textbf{Function} \\ \hline
+	\textbf{Register} &\textbf{Function} \\ \hline
 	0 & stores the last spi command $<7:0>$\\ \hline
     1 & read only register with following value: b0=1, b1=0, b2=1, b3=0, b4=0, b5=0, b6=0, b7=0 <15:8> \\ \hline
     3 & analog mux $<20:16>$ 0=ground, 1=iboot ref, 2=vbgp, 3=output error amplifier, 4=ground,  5= ground \\ \hline
@@ -76,7 +76,7 @@ The bandgap characteristics from the simulation can be seen in \autoref{tab:band
 \clearpage
 \subsection{Current Source}
 \label{subsubsec:current_source}
-The current source characteristics from the simulation can be seen in \autoref{tab:current_source} and \autoref{fig:ref_cur_mont}. The measurements have thereby shown that the current source is not in the range of the simulation. The current measured is about \qty{4}{\micro\ampere} higher than the one simulated which corresponds to a deviation of $\left|\frac{\qty{14.3}{\micro\ampere}-\qty{10.3}{\micro\ampere}}{\qty{10.3}{\micro\ampere}}\right|\cdot 100\approx 38.8 \%$. An exact explanation for this behavior was not found, but since the oscillator has a similar deviation and is independently of the current source the deviation most probably comes from the \glqq rmp1\grqq{} resistors since those were used in the layout of the oscillator and the current reference.
+The current source characteristics from the simulation can be seen in \autoref{tab:current_source} and \autoref{fig:ref_cur_mont}. The measurements have thereby shown that the current source is not in the range of the simulation. The current measured is about \qty{4}{\micro\ampere} higher than the one simulated which corresponds to a deviation of $\left|\frac{\qty{14.3}{\micro\ampere}-\qty{10.3}{\micro\ampere}}{\qty{10.3}{\micro\ampere}}\right|\cdot 100\approx 38.8 \%$. An exact explanation for this behavior was not found, but since the oscillator has a similar deviation and is independent of the current source the deviation most probably comes from the \glqq rnp1\grqq{} resistors since those were both used in the layout of the oscillator and the current reference.
 The current measured can be seen in \autoref{fig:current_source_distr}. About the other parameters no measurements could be done since the current source is not directly accessible.
 \begin{longtable}{|p{5cm}|p{2.5cm}|p{2.5cm}|p{2.5cm}|}
 	\hline
@@ -92,7 +92,7 @@ The current measured can be seen in \autoref{fig:current_source_distr}. About th
 \begin{figure}[ht]
 	\centering
 	\resizebox{1\textwidth}{!}{\includegraphics{images/06_current_ref/ref_cur_mont.pdf}}
-	\caption{Monte Carlo distribution of Current reference. X-axis shows current through \glqq IPRB0\grqq{} in \autoref{fig:ref_cur_sim_schem} (param.scs=3s, xh035.scs=mcg)}
+	\caption{Monte Carlo distribution of the current reference output current(param.scs=3s, xh035.scs=mcg)}
 	\label{fig:ref_cur_mont}
 \end{figure}
 \begin{figure}[ht]
@@ -104,7 +104,7 @@ The current measured can be seen in \autoref{fig:current_source_distr}. About th
 \clearpage
 \subsection{Oscillator}
 \label{subsubsec:oscillator}
-The oscillator characteristics from the simulation can be seen in \autoref{tab:osc}. The measurements have thereby shown that the oscillator is not in the range of of the simulation, when there is no configuration made over the SPI one has a nominal frequency of \qty{2.63}{\mega\hertz}, whereas in the simulation one had \qty{1.7}{\mega\hertz}, which results in an deviation of $\left|\frac{\qty{2.63}{\mega\hertz}-\qty{1.7}{\mega\hertz}}{\qty{1.7}{\mega\hertz}}\right|\cdot 100\approx 54.7 \%$, which is even more than in the current reference circuit. About the other parameters no measurements could be done since the oscillator is not directly accessible. Furthermore the frequency can also be tuned in the range of \qty{1.17}{\mega\hertz} to \qty{2.63}{\mega\hertz} over the spi registers (measured values) which results in the frequencies which can be seen in \autoref{tab:freq}. 
+The oscillator characteristics from the simulation can be seen in \autoref{tab:osc}. The measurements have thereby shown that the oscillator is not in the range of of the simulation, when there is no configuration made over the SPI one has a nominal frequency of \qty{2.63}{\mega\hertz}, whereas in the simulation one had \qty{1.7}{\mega\hertz}, which results in an deviation of $\left|\frac{\qty{2.63}{\mega\hertz}-\qty{1.7}{\mega\hertz}}{\qty{1.7}{\mega\hertz}}\right|\cdot 100\approx 54.7 \%$, which is even more than in the current reference circuit. About the other parameters no measurements could be done since the oscillator is not directly accessible. Furthermore the frequency can also be tuned in the range of \qty{1.17}{\mega\hertz} to \qty{2.63}{\mega\hertz} over the SPI registers (measured values) which results in the frequencies which can be seen in \autoref{tab:freq}. 
 \begin{longtable}{|p{5cm}|p{2.5cm}|p{2.5cm}|p{2.5cm}|}
 	\hline
 	\rowcolor{lightgray}
@@ -254,7 +254,7 @@ with
 
 \subsection{Device Characteristics}
 \label{sec:characteristics}
-The most critical device characteristics were compiled in to datasheet like table bellow in order to give a high-level insight into the device operation as well as to compare the measured values with the results obtained from simulations.
+The most critical device characteristics were compiled in to datasheet like table in \autoref{tab:datasheet} in order to give a high-level insight into the device operation as well as to compare the measured values with the results obtained from simulations.
 
 \input{../ASIC-DESIGN-2/images/07_DCDC/Datasheet.tex}
 
