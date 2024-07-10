@@ -68,7 +68,7 @@ As can be seen in \autoref{fig:chiplayout}, this design is significantly pad lim
     \label{fig:chiplayout}
 \end{figure}
 \subsection{Package}
-In \autoref{fig:package}, the QFN-48 package of the chip is illustrated with the pinout of the device marked. It is evident that there are two distinct ground connections, namely a power ground GND\_2 for the switching converter and GND as a general purpose ground for the internal circuits. The same applies to the supply voltages with V\_IN being the power input of the switching converter and VDD\_D being the internal logic supply. While these two domains are independent and not internally connected, they typically would be connected together on the \ac{PCB}. It is however advisable to separately bypass the power domains and separate them with a ferrite bead to minimize switching noise interference on the logic supply. The full pinout can be seen in \autoref{fig:package}.
+In \autoref{fig:package}, the QFN-48 package of the chip is illustrated with the pinout of the device marked. It is evident that there are two distinct ground connections, namely a power ground GND\_2 for the switching converter and GND as a general purpose ground for the internal circuits. The same applies to the supply voltages with V\_IN being the power input of the switching converter and VDD\_L being the internal logic supply. While these two domains are independent and not internally connected, they typically would be connected together on the \ac{PCB}. It is however advisable to separately bypass the power domains and separate them with a ferrite bead to minimize switching noise interfering on the logic supply. The full pinout can be seen in \autoref{fig:package}.
 \begin{itemize}
 	\item \textbf{A\_OUT:} Analog test pin to mux out internal signals. See also \autoref{subsec:spi_interface}
 	\item \textbf{D\_OUT:} Outputs internal clock when enabled. See also \autoref{subsec:spi_interface}
@@ -79,7 +79,7 @@ In \autoref{fig:package}, the QFN-48 package of the chip is illustrated with the
 	\item \textbf{L\_IN/L\_OUT:} Connection to an external \qty{47}{\micro\henry} coil
 	\item \textbf{RST:} Active high reset, resets the whole chip including the internal registers
 	\item \textbf{SPI*:} SPI interface connections
-	\item \textbf{VDD\_D:} Supply of digital logic and internal circuits
+	\item \textbf{VDD\_L:} Supply of digital logic and internal circuits
 	\item \textbf{V\_IN:} Supply voltage for power stage
 	\item \textbf{V\_OUT:} Buck-boost converter output, nominally \qty{5.0}{\volt}
 \end{itemize}

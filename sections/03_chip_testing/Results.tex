@@ -152,8 +152,8 @@ The oscillator characteristics from the simulation can be seen in \autoref{tab:o
 
 \subsubsection{Start-up}
 \label{sec:startup}
-The start-up behavior shows significant differences to the results observed in simulations. Instead of the expected gradual increase in the output voltage, we observed the output voltage increase in distinct steps as can be seen in \autoref{fig:startup}. These distinct steps stem from the fact the input voltage collapses cyclicly to under the limit given by the \ac{POR}. The cycle can be described as the chip starting up and increasing the input current until the input voltage drops to bellow the limit given by the \ac{POR} thus disabling the chip and causing the input voltage to rise until the chip starts up again. The cycle continues until the output voltage reaches close to the nominal level and the outer voltage control loop regulates the current.  
-The underlying issue is a misconfiguration of the internal registers causing the current limit to be disabled on start-up and the converter increasing the inductor current $I_L$ to unsustainable levels leading to the collapse of the input voltage. The cause is further described in \autoref{sec:missingcurrentlimit}.
+The start-up behavior shows significant differences to the results observed in simulations. Instead of the expected gradual increase in the output voltage, the output voltage increases in distinct steps as can be seen in \autoref{fig:startup}. These distinct steps stem from the fact that the input voltage collapses cyclicly to under the limit given by the \ac{POR}. The cycle can be described as the chip starting up and increasing the input current until the input voltage drops to below the limit given by the \ac{POR}, thus disabling the chip and causing the input voltage to rise until the chip starts up again. The cycle continues until the output voltage reaches close to the nominal level and the outer voltage control loop regulates the inductor current down. \\
+The underlying issue is a misconfiguration of the internal registers causing the current limit to be disabled on start-up and the converter increasing the inductor current to excessive levels, leading to the collapse of the input voltage. The cause is further elaborated on in \autoref{sec:missingcurrentlimit}.
 
 \begin{figure}[ht]
 	\centering
@@ -166,7 +166,7 @@ The underlying issue is a misconfiguration of the internal registers causing the
 
 
 \subsubsection{Load Step Response}
-The response to a load step is satisfactory and can be seen \autoref{fig:loadstep}. The regulation behavior is similar to the simulated response, but the measured controller has a higher bandwidth as can be seen in the faster response and is slightly overcompensated as it lacks the single oscillatory peak seen in the simulated response. Based on this response we estimate the implemented system has the following characteristics:
+The response to a load step is satisfactory and can be seen \autoref{fig:loadstep}. The regulation behavior is similar to the simulated response, with the caveate that the measured controller has a higher bandwidth as can be seen in the faster response. It is also slightly overcompensated as it lacks the single small overshoot seen in the simulated response. Based on the response in \autoref{fig:loadstep} we estimate the implemented system has the characteristics listed in \autoref{tab:regChar}.
 
 \begin{table}[H]
     \centering
@@ -190,7 +190,7 @@ The response to a load step is satisfactory and can be seen \autoref{fig:loadste
 \clearpage
 
 \subsubsection{Load Regulation}
-The output voltage with a \qty{0}{\milli\ampere} and \qty{200}{\milli\ampere} load can be seen in \autoref{fig:static0mA} and \autoref{fig:static200mA} respectively. The large ripple as well as the low frequency oscillating behavior are unintentional and are not present in the simulations conducted. The increased switching noise highlights the lack of switching during some periods of operation. Under correct operation the switching should never cease and only the duty-cycle should change depending the load conditions and input to output voltage ratio. As can be seen by comparing both images, the period of the discontinuous switching cycles changes based on the load current implying a connection to the regulators duty-cycle. It is suspected that an issue in current measurement circuit later described in \autoref{subsubsec:cur_mes_inac} could reasonable have influenced this behavior, although a clear causal link could not be established.
+The output voltage with a \qty{0}{\milli\ampere} and \qty{200}{\milli\ampere} load can be seen in \autoref{fig:static0mA} and \autoref{fig:static200mA} respectively. The large ripple as well as the low frequency oscillating behavior are unintentional and are not present in the simulations conducted. The increased switching noise highlights the lack of switching during some periods of operation. Under correct operation, the switching should never cease and only the duty-cycle should change depending the load conditions and input to output voltage ratio. As can be seen by comparing both images, the period of the discontinuous switching cycles changes based on the load current,implying a connection to the regulators duty-cycle. It is suspected that an issue in current measurement circuit later described in \autoref{subsubsec:cur_mes_inac} could reasonable have influenced this behavior, although a clear causal link could not be established.
 \label{sec:loadRegulation}
 \begin{figure}[ht]
 	\centering
@@ -226,7 +226,7 @@ The output voltage with a \qty{0}{\milli\ampere} and \qty{200}{\milli\ampere} lo
 %    \label{fig:efficiency TI chip}
 %\end{figure}
 
-The conversion efficiency of our chip was measured under various load conditions and input voltage settings and can be seen in \autoref{fig:efficiency}. The measured results closely match our simulated values of \qty{83.5}{\percent} at \qty{200}{\milli\ampere} load current regardless of the input voltage applied. The slight decrease in efficiency in comparison to the simulated values can be attributed to several not modeled effects such as bond wire resistance, losses in the input and output capacitors as well as losses else where outside of the \ac{IC}. Of note is that the efficiency figures for \qty{20}{\milli\ampere} and \qty{50}{\milli\ampere} loads in \autoref{fig:efficiency} were estimated by linearly interpolating the measured input power levels at \qty{1}{\milli\ampere} and \qty{100}{\milli\ampere} and then dividing the known output power level by the calculated input power estimate.
+The conversion efficiency of our chip was measured under various load conditions and input voltage settings and can be seen in \autoref{fig:efficiency}. The measured results closely match our simulated values of \qty{83.5}{\percent} at \qty{200}{\milli\ampere} load current regardless of the input voltage applied. The slight decrease in efficiency in comparison to the simulated values can be attributed to several not modeled effects such as bond wire resistance, losses in the input and output capacitors as well as losses else where outside of the \ac{IC}. Of note is that the efficiency figures for \qty{20}{\milli\ampere} and \qty{50}{\milli\ampere} loads in \autoref{fig:efficiency} were estimated by linearly interpolating the measured input power levels between \qty{1}{\milli\ampere} and \qty{100}{\milli\ampere} and then dividing the known output power level by the calculated input power estimate.
 \begin{figure}[h]
     \centering
     \input{../ASIC-DESIGN-2/images/07_DCDC/Efficiency.tex}
@@ -236,13 +236,13 @@ The conversion efficiency of our chip was measured under various load conditions
 \clearpage
 \subsubsection{Conversion Losses}
 \label{sec:losses}
-The total conversion losses can classified into two broad categories of switching frequency dependent switching losses and load dependent conduction losses as shown in \autoref{eq:PLoss}. Our measured conversion losses can be seen in \autoref{fig:losses} and shows a roughly \qty{100}{\milli\watt} load independent loss, which explains the poor efficiency at sub \qty{100}{\milli\ampere} output currents. As the output currents increase, the proportion of power loss due to switching decreases, leading to the improved efficiency in the 100 to \qty{200}{\milli\ampere} output current range. With large output currents >\qty{200}{\milli\ampere} the conduction losses take over leading again to a decrease in efficiency.
+The total conversion losses can classified into two broad categories of switching frequency dependent switching losses $P_{SWITCH}$ and load dependent conduction losses $P_{COND}$ as shown in \autoref{eq:PLoss}. Our measured conversion losses can be seen in \autoref{fig:losses} and shows a roughly \qty{100}{\milli\watt} load independent loss, which explains the poor efficiency at sub \qty{100}{\milli\ampere} output currents. With increased output currents, the proportion of power loss due to switching decreases, leading to the improved efficiency in the 100 to \qty{200}{\milli\ampere} output current range. At large output current values >\qty{200}{\milli\ampere} the conduction losses take over leading again to a decrease in efficiency.
 
 \begin{equation}
     P_{TOT} \approx P_{SWITCH} + P_{COND}
 \end{equation}
 \label{eq:PLoss}
-For an iso-frequency measurement as conducted in \autoref{fig:losses} the switching losses appear as a constant offset as $P_{SWITCH}\;\propto\;1$ and the conduction losses increase with the load current as $P_{COND}\;\propto\;I_{OUT}^2$. These contributions can be clearly seen \autoref{fig:losses} as a constant loss together with a quadratically increasing loss based on the load applied.
+For an iso-frequency measurement as conducted in \autoref{fig:losses}, the switching losses appear as a constant offset as $P_{SWITCH}\;\propto\;1$ and the conduction losses increase with the load current as $P_{COND}\;\propto\;I_{OUT}^2$. These contributions can be clearly seen in \autoref{fig:losses} as a constant loss together with a quadratically increasing loss based on the load applied.
 
 \begin{figure}[h]
     \centering
