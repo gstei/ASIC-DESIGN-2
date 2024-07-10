@@ -6,6 +6,7 @@ Our initial objective was to conclude the chip design phase of this project with
 The layout of the buck-boost converter can be seen in  \autoref{fig:BBlayout} with annotations showing the rough floorplan of the circuit. Surrounding the converter are the four large switching transistors which increased significantly in size between initial planning in the previous thesis and to what we ultimately implemented. The exact values and sizes are listed in \autoref{tab:spec_pmos} and \autoref{tab:spec_nmos}. The largest contributor to the losses in the power-stage surprisingly are the metal trace resistances which increased the theoretical $R_{DS,on}$ of the \ac{PMOS} transistors from \qty{58.3}{\milli\ohm} to an effective value of \qty{240}{\milli\ohm} in post-layout simulations. These metal resistances could not be further minimized through wider traces as the limiting factor was the maximum metal density for manufacturing. \\
 The large empty space above the error amplifier in \autoref{fig:BBlayout} was initially intended for a temperature sensing circuit in order to measure the rough temperature of the power electronics and to disable operation in case of an over temperature event. Due to the tight timeline we opted not to layout this circuit as we were already significantly behind schedule and needed the time to finish the layout of other critical circuits. Due to the same reason we implemented only the bare-minimum of \ac{DFT} functionality to measure the oscillator clock frequency, the bandgap reference voltage and the internal current reference. As a result the rest of the chip is with respect to troubleshooting a black-box with no possibility to measure internal signals.
 
+
 \begin{table}[H]
     \centering
     \begin{tabular}{|c|c|c|}
@@ -20,6 +21,7 @@ The large empty space above the error amplifier in \autoref{fig:BBlayout} was in
     \label{tab:spec_pmos}
 \end{table}
 
+\clearpage
 \begin{table}[H]
     \centering
     \begin{tabular}{|c|c|c|}
@@ -65,23 +67,25 @@ As can be seen in \autoref{fig:chiplayout}, this design is significantly pad lim
     \caption{Floorplan of the entire chip with annotations}
     \label{fig:chiplayout}
 \end{figure}
-\subsubsection{Package}
-In \autoref{fig:package}, the package (QFN-48) of the chip is illustrated. It is evident that there are two distinct ground connections, namely GND and GND\_2, and two separate supply voltages, V\_IN and VDD\_D. These two domains can be interconnected on the \ac{PCB}. However, to minimize noise interference and to facilitate separate analysis of the DC/DC converter and the rest of the circuit, these domains are not internally connected within the chip. Specifically, GND\_2 serves as the ground for the DC/DC converter, while GND is the ground for the digital part, bandgap, current reference, and so on. Similarly, V\_IN is the supply voltage for the DC/DC converter, and VDD\_D is the supply voltage for the remaining circuit components. An exact explanation of all the pins can be found below:
+\subsection{Package}
+In \autoref{fig:package}, the QFN-48 package of the chip is illustrated with the pinout of the device marked. It is evident that there are two distinct ground connections, namely a power ground GND\_2 for the switching converter and GND as general ground for the internal circuits. The same applies to the supply voltages with V\_IN being the power input of the switching converter and VDD\_D being the internal logic supply. While these two domains are independent and not internally connected, they typically would be connected together on the \ac{PCB}. It is however advisable to separately bypass the power domains and separate them with a ferrite bead to minimize switching noise interference on the logic supply. Specifically, GND\_2 serves as the ground for the DC/DC converter, while GND is the ground for the digital part, bandgap, current reference and other internal circuits. The full pinout can be seen in \autoref{fig:package}.
 \begin{itemize}
-	\item \textbf{A\_OUT:} Analog test point can mux out internal signals. See also \autoref{subsec:spi_interface}.
-	\item \textbf{D\_OUT:} Outputs clock when enabled. See also \autoref{subsec:spi_interface}.
-	\item \textbf{FB:} Feedback to overwrite output voltage by external voltage divider. (\textcolor{red}{*insert formula here*}).
-	\item \textbf{GND:} Ground of Digital logic and reference circuits like Bandgap.
-	\item \textbf{GND\_2:} Ground pins for DC/DC converter.
-	\item \textbf{L\_IN/L\_OUT:} Connection to external DC/DC coil. (\textcolor{red}{\qty{50}{\milli\henry}}).
-	\item \textbf{RST:} Pull to high when you want to reset the chip. Resets the whole chip including the register content of the digital part.
-	\item \textbf{SPI*:} SPI interface connections.
-	\item \textbf{VDD\_D:} Supply voltage of Digital logic and reference circuits like Bandgap.
-	\item \textbf{V\_OUT:} Charging pin of HIs, outputs 5V independent of input voltage (4.3-5.5V, up to 300mA tested).
+	\item \textbf{A\_OUT:} Analog test pin to mux out internal signals. See also \autoref{subsec:spi_interface}
+	\item \textbf{D\_OUT:} Outputs internal clock when enabled. See also \autoref{subsec:spi_interface}
+	\item \textbf{FB:} Feedback to overwrite output voltage by external voltage divider \\
+            $V_{OUT} = \qty{1.25}{\volt} \cdot \frac{R_{FBT}}{R_{FBB}}$; $(R_{FBT}+R_{FBB}) \ll \qty{100}{\kilo\ohm}$
+	\item \textbf{GND:} Ground of digital logic and internal circuits
+	\item \textbf{GND\_2:} Ground pins for DC/DC converter
+	\item \textbf{L\_IN/L\_OUT:} Connection to an external \qty{47}{\micro\henry} coil
+	\item \textbf{RST:} Active high reset, resets the whole chip including the internal registers
+	\item \textbf{SPI*:} SPI interface connections
+	\item \textbf{VDD\_D:} Supply of digital logic and internal circuits
+	\item \textbf{V\_IN:} Supply voltage for power stage
+	\item \textbf{V\_OUT:} Buck-boost converter output, nominally \qty{5.0}{\volt}
 \end{itemize}
 \begin{figure}[h]
 	\centering
 	\includegraphics[width=1\textwidth]{../ASIC-DESIGN-2/images/pakage.pdf}
-	\caption{Floor-plan Package, Top view}
+	\caption{QFN-48 Device Pinout, Top View}
 	\label{fig:package}
 \end{figure}

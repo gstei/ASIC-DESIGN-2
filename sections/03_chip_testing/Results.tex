@@ -22,29 +22,29 @@ Since the the SPI communication is working as in the testbench and the testscrip
 \subsection{POR}
 According to the simulation, the power-on reset (POR) exhibits the characteristics depicted in \autoref{tab:por}. The POR measurement was conducted on a single random sample at room temperature. To measure the characteristics from the simulation, a pull-up resistor was connected to the output of the analog test pin as the test pin exhibits high impedance when the chip is unpowered and is grounded when the chip is powered (as long as the analog test pint was not configured differently over the SPI).
 Consequently, when the chip gets powered and reaches a voltage over the minimum voltage of the POR, the analog test pin is driven to zero and this change is observable. Due to that it turned out that the minimum voltage of the POR is \qty{3.72}{\volt} which is \qty{0.02}{\volt} more than the upper corner of the Simulation. Since the time was limited and the deviation is very small no further investigations were made on that. The input and output delay where measured the same way and it turned out that those values are inside the corners of the simulations. For the input delay a value of \qty{40}{\micro\second} was measured which is the time from which the input voltage is over over  \qty{3.72}{\volt} and the analog test pin is driven to ground. The other way around a value of \qty{6.5}{\micro\second} was measured as it can be also seen in \autoref{tab:por} column four.
-\begin{longtable}{|p{2.5cm}|p{2.5cm}|p{2.5cm}|p{2.5cm}|p{2.5cm}|}
+\begin{longtable}{|p{5cm}|p{2cm}|p{2cm}|p{2cm}|p{2cm}|}
 	\hline
 	\rowcolor{lightgray}
 	\textbf{Description} &\textbf{Min.} &\textbf{Max.} & \textbf{Mes.} & \textbf{Unit} \\ \hline
 	
-	input delay & 26 & 44 & 40  &\qty{}{\micro\second} \\ \hline
-	output delay & 4.4 & 6.8 & 6.5 &\qty{}{\micro\second} \\ \hline
-	Current consumption & 13 & 31 & -& \qty{}{\micro\ampere} \\ \hline
-	Min voltage & 3.176& 3.7 & 3.72 & \qty{}{\volt} \\ \hline
+	Input Delay & 26 & 44 & 40  &\qty{}{\micro\second} \\ \hline
+	Output Delay & 4.4 & 6.8 & 6.5 &\qty{}{\micro\second} \\ \hline
+	Current Consumption & 13 & 31 & -& \qty{}{\micro\ampere} \\ \hline
+	Min Voltage & 3.176& 3.7 & 3.72 & \qty{}{\volt} \\ \hline
 	\caption{POR characteristic} % needs to go inside longtable environment
 	\label{tab:por}
 \end{longtable}
 \subsection{Bandgap}
 \label{subsubsec:bandgap}
 The bandgap characteristics from the simulation can be seen in \autoref{tab:bandgap}, \autoref{fig:bandgap_voltage_vs_temp} and \autoref{fig:bandgap_voltage_mc}. The measurements have thereby shown that the bandgap voltage is in the range of of the simulation, the mean value is just shifted by 10mV. As it can be seen in the comparison of \autoref{fig:bandgap_voltage_distrb} and \autoref{fig:bandgap_voltage_mc}. Furthermore due to the fact that the reference current is slightly to high the center of the bandgap vs temperature curve is not anymore at \qty{40}{\degreeCelsius} but at about \qty{55}{\degreeCelsius} as it can be seen in the comparison of \autoref{fig:bandgap_voltage_vs_temp} and \autoref{fig:bandgap_voltage_vs_temp_mes}. About the other parameters like the current consumption and the min voltage no measurements could be done since the band gap is not directly accessible.
-\begin{longtable}{|p{3.5cm}|p{3.5cm}|p{3.5cm}|p{3.5cm}|}
+\begin{longtable}{|p{5cm}|p{2.5cm}|p{2.5cm}|p{2.5cm}|}
 	\hline
 	\rowcolor{lightgray}
 	\textbf{Description} &\textbf{Min} &\textbf{Max} & \textbf{Unit} \\ \hline
 	
-	Bandgap voltage & 1.226 & 1.277 &\qty{}{\volt} \\ \hline
-	Current consumption & 16.73 & 23.53 & \qty{}{\micro\ampere} \\ \hline
-	Min voltage & 2.3& 2.9 & \qty{}{\volt} \\ \hline
+	Bandgap Voltage & 1.226 & 1.277 &\qty{}{\volt} \\ \hline
+	Current Consumption & 16.73 & 23.53 & \qty{}{\micro\ampere} \\ \hline
+	Min Voltage & 2.3& 2.9 & \qty{}{\volt} \\ \hline
 	\caption{Bandgap characteristic} % needs to go inside longtable environment
 	\label{tab:bandgap}
 \end{longtable}
@@ -76,16 +76,16 @@ The bandgap characteristics from the simulation can be seen in \autoref{tab:band
 \clearpage
 \subsection{Current Source}
 \label{subsubsec:current_source}
-The current source characteristics from the simulation can be seen in \autoref{tab:current_source} and \autoref{fig:ref_cur_mont}. The measurements have thereby shown that the current source is not in the range of of the simulation. The current measured is about \qty{4}{\micro\ampere} higher than the one simulated which corresponds to a derivation of $\left|\frac{\qty{14.3}{\micro\ampere}-\qty{10.3}{\micro\ampere}}{\qty{10.3}{\micro\ampere}}\right|\cdot 100\approx 38.8 \%$. An exact explanation for this behavior was not found, but since the oscillator has a similar deviation and is independently of the current source the deviation most probably comes from the \glqq rmp1\grqq{} resistors since those were used in the layout of the oscillator and the current reference.
+The current source characteristics from the simulation can be seen in \autoref{tab:current_source} and \autoref{fig:ref_cur_mont}. The measurements have thereby shown that the current source is not in the range of the simulation. The current measured is about \qty{4}{\micro\ampere} higher than the one simulated which corresponds to a deviation of $\left|\frac{\qty{14.3}{\micro\ampere}-\qty{10.3}{\micro\ampere}}{\qty{10.3}{\micro\ampere}}\right|\cdot 100\approx 38.8 \%$. An exact explanation for this behavior was not found, but since the oscillator has a similar deviation and is independently of the current source the deviation most probably comes from the \glqq rmp1\grqq{} resistors since those were used in the layout of the oscillator and the current reference.
 The current measured can be seen in \autoref{fig:current_source_distr}. About the other parameters no measurements could be done since the current source is not directly accessible.
-\begin{longtable}{|p{3.5cm}|p{3.5cm}|p{3.5cm}|p{3.5cm}|}
+\begin{longtable}{|p{5cm}|p{2.5cm}|p{2.5cm}|p{2.5cm}|}
 	\hline
 	\rowcolor{lightgray}
 	\textbf{Description} &\textbf{Min} &\textbf{Max} & \textbf{Unit} \\ \hline
 	
-	Reference current & 8.4 & 13.5 &\qty{}{\micro\ampere} \\ \hline
-	Current consumption & 50 & 81 & \qty{}{\micro\ampere} \\ \hline
-	Min voltage (voltage where the trans resistance ($\frac{\Delta V_{in}}{\Delta I_{out}}$) is higher than \qty{1}{\mega\ohm}) & 3& 3.33 & \qty{}{\volt} \\ \hline
+	Reference Current & 8.4 & 13.5 &\qty{}{\micro\ampere} \\ \hline
+	Current Consumption & 50 & 81 & \qty{}{\micro\ampere} \\ \hline
+	Min Voltage (Threshold where $\frac{\Delta V_{in}}{\Delta I_{out}}$ > \qty{1}{\mega\ohm}) & 3& 3.33 & \qty{}{\volt} \\ \hline
 	\caption{Current reference characteristics} % needs to go inside longtable environment
 	\label{tab:current_source}
 \end{longtable}
@@ -105,15 +105,15 @@ The current measured can be seen in \autoref{fig:current_source_distr}. About th
 \subsection{Oscillator}
 \label{subsubsec:oscillator}
 The oscillator characteristics from the simulation can be seen in \autoref{tab:osc}. The measurements have thereby shown that the oscillator is not in the range of of the simulation, when there is no configuration made over the SPI one has a nominal frequency of \qty{2.63}{\mega\hertz}, whereas in the simulation one had \qty{1.7}{\mega\hertz}, which results in an deviation of $\left|\frac{\qty{2.63}{\mega\hertz}-\qty{1.7}{\mega\hertz}}{\qty{1.7}{\mega\hertz}}\right|\cdot 100\approx 54.7 \%$, which is even more than in the current reference circuit. About the other parameters no measurements could be done since the oscillator is not directly accessible. Furthermore the frequency can also be tuned in the range of \qty{1.17}{\mega\hertz} to \qty{2.63}{\mega\hertz} over the spi registers (measured values) which results in the frequencies which can be seen in \autoref{tab:freq}. 
-\begin{longtable}{|p{3.5cm}|p{3.5cm}|p{3.5cm}|p{3.5cm}|}
+\begin{longtable}{|p{5cm}|p{2.5cm}|p{2.5cm}|p{2.5cm}|}
 	\hline
 	\rowcolor{lightgray}
 	\textbf{Description} &\textbf{Min} &\textbf{Max} & \textbf{Unit} \\ \hline
 	
 	Frequency & 1.15 & 1.8 &\qty{}{\mega\hertz} \\ \hline
-	Current consumption & 35 & 50 & \qty{}{\micro\ampere} \\ \hline
-	Min voltage & 2& 3.187 & \qty{}{\volt} \\ \hline
-	\caption{Specification} % needs to go inside longtable environment
+	Current Consumption & 35 & 50 & \qty{}{\micro\ampere} \\ \hline
+	Min Voltage & 2& 3.187 & \qty{}{\volt} \\ \hline
+	\caption{Oscillator specification} % needs to go inside longtable environment
 	\label{tab:osc}
 \end{longtable}
 \begin{table}[h]
@@ -121,26 +121,26 @@ The oscillator characteristics from the simulation can be seen in \autoref{tab:o
 	\begin{tabular}{|c|c|}
 		\hline
 		\rowcolor{lightgray}
-		Register configuration & Frequency (MHz) \\
+		\textbf{Register configuration} & \textbf{Frequency (kHz)} \\
 		\hline
-		0 & \qty{2.63}{\mega\hertz} \\
+		0 & \qty{2630}{} \\
 		\hline
-		1 & \qty{2.3}{\mega\hertz} \\
+		1 & \qty{2300}{} \\
 		\hline
-		2 & \qty{2.19}{\mega\hertz} \\
+		2 & \qty{2190}{}\\
 		\hline
-		3 & \qty{1.85}{\mega\hertz} \\
+		3 & \qty{1850}{} \\
 		\hline
-		4 & \qty{1.67}{\mega\hertz} \\
+		4 & \qty{1670}{} \\
 		\hline
-		5 & \qty{1.43}{\mega\hertz} \\
+		5 & \qty{1430}{}\\
 		\hline
-		6 & \qty{1.27}{\mega\hertz} \\
+		6 & \qty{1270}{} \\
 		\hline
-		7 & \qty{1.17}{\mega\hertz} \\
+		7 & \qty{1170}{}\\
 		\hline
 	\end{tabular}
-	\caption{Measured Frequencies with different register configurations at \qty{22}{\degreeCelsius} and 5V}
+	\caption{Measured frequency with different register configurations at \qty{22}{\degreeCelsius} and \qty{5}{\volt}}
 	\label{tab:freq}
 \end{table}
 
@@ -162,6 +162,7 @@ The underlying issue is a misconfiguration of the internal registers causing the
 	\caption{Start-up behavior without an attached load. Dark Blue: $V_{IN}$ measured; Pink: $V_{OUT}$ measured}
 	\label{fig:startup}
 \end{figure}
+\clearpage
 
 
 \subsubsection{Load Step Response}
@@ -226,7 +227,7 @@ The conversion efficiency of our chip was measured under various load conditions
 \begin{figure}[h]
     \centering
     \input{../ASIC-DESIGN-2/images/07_DCDC/Efficiency.tex}
-    \caption{Conversion efficiency of our chip; Data points for 20 mA and 50 mA are estimates based on interpolation (Oscillator Frequency \qty{1.17}{\mega\hertz})}
+    \caption{Conversion efficiency at $f_{SW}$ = 1.17 MHz; Data points for 20 mA and 50 mA are estimates based on interpolation}
     \label{fig:efficiency}
 \end{figure}
 \clearpage
@@ -240,19 +241,16 @@ The total conversion losses can be put into two broad categories of switching fr
 \label{eq:PLoss}
 with
 \begin{equation*}
-   P_{SWITCH} \propto 1
-\end{equation*}
-and 
-\begin{equation*}
-	P_{COND} \propto I_{OUT}^2
+   P_{SWITCH}\;\propto\;1\; \textrm{and} \;P_{COND}\;\propto\;I_{OUT}^2
 \end{equation*}
 
 \begin{figure}[h]
     \centering
     \input{../ASIC-DESIGN-2/images/07_DCDC/Losses.tex}
-    \caption{Conversion losses at 1.17 MHz switching frequency}
+    \caption{Conversion losses at $f_{SW}$ = 1.17 MHz}
     \label{fig:losses}
 \end{figure}
+\clearpage
 
 \subsection{Device Characteristics}
 \label{sec:characteristics}

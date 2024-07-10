@@ -9,15 +9,15 @@ For data storage, we opted for a database solution, providing a convenient metho
 
 The database was structured with the following columns:
 \begin{itemize}
-    \item \textbf{Id}: The unique identifier for each measurement.
-    \item \textbf{chip\_id}: The identifier for the chip that was measured.
-    \item \textbf{measurement\_type}: The type of measurement performed.
-    \item \textbf{parameter1}: The first parameter used for the test, such as the input voltage applied.
-    \item \textbf{parameter2}: The second parameter used for the test, such as the load applied to the output.
-    \item \textbf{temperature}: The temperature of the chip during the measurement.
-    \item \textbf{data}: The measured data.
-    \item \textbf{measurement\_result}: The result of the measurement, if applicable.
-    \item \textbf{Timestamp}: The timestamp of the measurement.
+    \item \textbf{Id}: The unique identifier for each measurement
+    \item \textbf{chip\_id}: The identifier for the chip that was measured
+    \item \textbf{measurement\_type}: The type of measurement performed
+    \item \textbf{parameter1}: The first parameter used for the test, such as the input voltage applied
+    \item \textbf{parameter2}: The second parameter used for the test, such as the load applied to the output
+    \item \textbf{temperature}: The temperature of the chip during the measurement
+    \item \textbf{data}: The measured data
+    \item \textbf{measurement\_result}: The result of the measurement, if applicable
+    \item \textbf{Timestamp}: The timestamp of the measurement
 \end{itemize}
 
 \subsubsection{Test Software Language}
@@ -26,26 +26,26 @@ The test software was implemented using Python. Python is a high-level programmi
 \subsubsection{Test Software Implementation}
 Prior to commencing the test software development, the various tests to be performed were determined, aiming to align with those conducted in simulations. These included:
 \begin{itemize}
-    \item Startup behavior with reset disabled.
-    \item Startup behavior with active reset and subsequently disabled reset.
-    \item Load step response with load variations of 10mA, 100mA, and 200mA.
-    \item Output response to stepped input voltage changes.
-    \item Turn-off and turn-on behavior with brief reset enablement.
-    \item SPI test to mux out the wanted analog/digital signal, change the clock frequency, and read back the register values.
+    \item Startup behavior with reset disabled
+    \item Startup behavior with active reset and subsequently disabled reset
+    \item Load step response with load variations of 10mA, 100mA, and 200mA
+    \item Output response to stepped input voltage changes
+    \item Turn-off and turn-on behavior with brief reset enablement
+    \item SPI test to mux out the wanted analog/digital signal, change the clock frequency, and read back the register values
 \end{itemize}
 
 \subsubsection{Test Setup}
 The primary test setup utilized the PXI system from National Instruments (NI). This system integrates various measurement instruments into a single unit and serves as the computer running the Python code. Consequently, there are minimal delays due to additional wires between the computer and measurement instruments. Moreover, synchronized triggers are available on this measurement system, eliminating the need for trigger wiring between instruments. This advantage reduces setup complexity and wiring requirements. The specific PXI system employed was the PXI model \glqq{}NI PXIe-8881\grqq{}, equipped with the following modules:
 
 \begin{itemize}
-    \item \textbf{PXIe-4141}: This is a SMU (Source Measurement Unit) which can be used to apply the input voltage to the chip.
-    \item \textbf{E3631A}: This is a power supply which can be used to apply the input voltage to the chip.
-    \item \textbf{PXI-5142}: This is a two channel oscilloscope used to measure the output and input voltage of the chip.
-    \item \textbf{PXI-5163}: This is a two channel oscilloscope used to measure the output and input current of the chip.
-    \item \textbf{TP04300}: This is the thermostreamer used to control the temperature of the chip.
-    \item \textbf{PXI-6363}: This is a GPIO controller used to control the reset of the chip and the different load resistors.
-    \item \textbf{NGE-100}: This is a power supply to provide the power for the test circuit.
-    \item \textbf{FTDI C232HM-DDHSL-0}: This is a USB to SPI converter used to communicate with the chip.
+    \item \textbf{PXIe-4141}: This is a SMU (Source Measurement Unit) which can be used to apply the input voltage to the chip
+    \item \textbf{E3631A}: This is a power supply which can be used to apply the input voltage to the chip
+    \item \textbf{PXI-5142}: This is a two channel oscilloscope used to measure the output and input voltage of the chip
+    \item \textbf{PXI-5163}: This is a two channel oscilloscope used to measure the output and input current of the chip
+    \item \textbf{TP04300}: This is the thermostreamer used to control the temperature of the chip
+    \item \textbf{PXI-6363}: This is a GPIO controller used to control the reset of the chip and the different load resistors
+    \item \textbf{NGE-100}: This is a power supply to provide the power for the test circuit
+    \item \textbf{FTDI C232HM-DDHSL-0}: This is a USB to SPI converter used to communicate with the chip
 \end{itemize}
 
 An overview of all the instruments can be seen in Figure \autoref{fig:overview}. More details about the hardware can also be found in the \href{https://github.com/gstei/asic_validation/}{git repository}\footnote{https://github.com/gstei/asic\_validation.git} where test was written.

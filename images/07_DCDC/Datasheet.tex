@@ -1,0 +1,19 @@
+\begin{table}[c]
+    \begin{tabular}{|l|l|l|l|l|l|}
+    \hline
+    \rowcolor{lightgray}
+    \textbf{Parameter} & \textbf{Test Conditions} & \textbf{Sim} & \textbf{Min} & \textbf{Max} & \textbf{Unit} \\ \hline
+    $V_{OUT}$  & Average output voltage & 5.01  & 4.99  &  5.03 &    \\ \hline
+    Line Regulation  & $I_{LOAD}$ = \qty{200}{\milli\ampere} &  $<\qty{1}{\percent}$ &   &  $<\qty{1}{\percent}$ &    \\ \hline
+    Load Regulation  & $I_{LOAD}$ = \qty{200}{\milli\ampere} &  $<\qty{1}{\percent}$ &   &  $<\qty{1}{\percent}$ &    \\ \hline
+    $V_{OUT,PP}$   & Ripple voltage on  $V_{OUT}$, \qty{200}{\milli\ampere} &  13.2 &  &  200 &  \qty{}{\milli\volt} \\ \hline
+    $f_{SW}$  & Converter PWM frequency  &   1000  & 1170 & 2630   & \qty{}{\kilo\hertz}\\ \hline
+    $\eta$  & Efficiency @  $f_{SW}$ = \qty{1}{\mega\hertz}, $I_{LOAD}$ = \qty{200}{\milli\ampere}&   83.48  &  & 80.0   & \qty{}{\percent}\\ \hline
+    $I_{Q,VDDL}$  & Quiescent current in $V_{DDL}$, $V_{DDL}$ = \qty{5}{\volt}, $V_{RST}$ = \qty{0}{\volt} &   -  &  & 1.12   & \qty{}{\milli\ampere} \\ \hline
+    $I_{SH,VDDL}$  & Shutdown current in $V_{DDL}$, $V_{DDL}$ = \qty{5}{\volt}, $V_{RST}$ = \qty{5}{\volt} &  -   &  &  $<10.0$    & \qty{}{\micro\ampere}\\ \hline
+    $I_{LEAK,VIN}$  & Leakage current in $V_{IN}$, $V_{IN}$ = \qty{5}{\volt}, $V_{RST}$ = \qty{5}{\volt} &   -  &  &  140   & \qty{}{\micro\ampere}\\ \hline  
+    $I_{IN,STBY}$  & Input current $V_{DDL}$ = $V_{IN}$ = \qty{5}{\volt}, $I_{LOAD}$ = \qty{0}{\milli\ampere}  &  1.03   &  &  19   & \qty{}{\milli\ampere}\\ \hline    
+    $R_{DS,on,HS}$ & High-Side switch ON-Resistance &   58.3 &   &     & \qty{}{\milli\ohm}\\ \hline 
+    $R_{DS,on,LS}$ & Low-Side switch ON-Resistance &   37 &   &     & \qty{}{\milli\ohm}\\ \hline 
+    end{tabular}
+\end{table}
