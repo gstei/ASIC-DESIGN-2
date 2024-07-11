@@ -14,7 +14,7 @@ On the SPI interface one should be able to successfully write and read back regi
 	5 & output voltage fb $<32>$ \\ \hline
 	6 & Freq tune digital part $<42:40>$ can add up to 3 caps eq sized caps to saw tooth ==> clock 4 times slower, dig out$<47>$ ==> enable clock on digital pad\\ \hline
     7 & Freq tune linear regulator$<50:48>$ can add up to 3 caps eq sized caps to saw tooth ==> clock 4 times slower \\ \hline
-	\caption{Register description} % needs to go inside longtable environment
+	\caption{SPI register description} % needs to go inside longtable environment
 	\label{tab:reg_des}
 \end{longtable}
 Since the the SPI communication is working as in the testbench and the testscript is available in the git repository. No further test results are listed here. But one thing that one has to be aware of when one wants to control the chip is that the CS line has to be activated before the first clock edge arrives otherwise the communication will not work as mentioned in \autoref{subsubsec:SPI}.
@@ -63,7 +63,7 @@ The bandgap characteristics from the simulation can be seen in \autoref{tab:band
 \begin{figure}[ht]
 	\centering
 	\includegraphics[width=\textwidth]{images/Bandgap_Voltage_Distribution.png}
-	\caption{Bandgap voltage distribution at \qty{22}{\degreeCelsius} and 5V}
+	\caption{Bandgap voltage distribution at \qty{22}{\degreeCelsius} and 5V over different samples}
 	\label{fig:bandgap_voltage_distrb}
 \end{figure}
 
@@ -98,7 +98,7 @@ The current measured can be seen in \autoref{fig:current_source_distr}. About th
 \begin{figure}[ht]
 	\centering
 	\includegraphics[width=\textwidth]{images/Current_Reference_Distribution.png}
-	\caption{Current source distribution at \qty{22}{\degreeCelsius} and 5V}
+	\caption{Current reference distribution at \qty{22}{\degreeCelsius} and 5V over different samples}
 	\label{fig:current_source_distr}
 \end{figure}
 \clearpage
@@ -113,7 +113,7 @@ The oscillator characteristics from the simulation can be seen in \autoref{tab:o
 	Frequency & 1.15 & 1.8 &\qty{}{\mega\hertz} \\ \hline
 	Current Consumption & 35 & 50 & \qty{}{\micro\ampere} \\ \hline
 	Min Voltage & 2& 3.187 & \qty{}{\volt} \\ \hline
-	\caption{Oscillator specification} % needs to go inside longtable environment
+	\caption{Oscillator specification simulated with default configuration (Register configuration 0)} % needs to go inside longtable environment
 	\label{tab:osc}
 \end{longtable}
 \begin{table}[h]
